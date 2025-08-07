@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="project-subpage">
+    <div class="container">
+        <a href="{{ url_for('project_detail', project_id=project.id) }}" class="back-link">
+            <i class="fas fa-arrow-left"></i> Volver a {{ project.title }}
+        </a>
+        
+        <div class="subpage-header">
+            <h1>{{ project.title }} - {{ title }}</h1>
+        </div>
+        
+        <div class="subpage-content">
+            <div class="subpage-text">
+                {{ content|safe }}
+            </div>
+            
+            <div class="subpage-image">
+                {% if title == 'Preprocesamiento' %}
+                <img src="{{ url_for('static', filename='img/data-processing.jpg') }}" alt="Procesamiento de datos">
+                {% elif title == 'Analisis' %}
+                <img src="{{ url_for('static', filename='img/data-analysis.jpg') }}" alt="Análisis de datos">
+                {% else %}
+                <img src="{{ url_for('static', filename='img/ml-model.jpg') }}" alt="Modelo de Machine Learning">
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="subpage-nav">
+            <a href="{{ url_for('project_subpage', project_id=project.id, subpage='preprocesamiento') }}" 
+               class="btn {% if title == 'Preprocesamiento' %}active{% endif %}">
+                Preprocesamiento
+            </a>
+            <a href="{{ url_for('project_subpage', project_id=project.id, subpage='analisis') }}" 
+               class="btn {% if title == 'Analisis' %}active{% endif %}">
+                Análisis
+            </a>
+            <a href="{{ url_for('project_subpage', project_id=project.id, subpage='ml') }}" 
+               class="btn {% if title == 'Ml' %}active{% endif %}">
+                Machine Learning
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

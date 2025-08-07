@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="project-detail">
+    <div class="container">
+        <a href="{{ url_for('projects_page') }}" class="back-link">
+            <i class="fas fa-arrow-left"></i> Volver a Proyectos
+        </a>
+        
+        <div class="project-header">
+            <h1>{{ project.title }}</h1>
+            <p class="project-description">{{ project.description }}</p>
+            <img src="{{ url_for('static', filename='img/' + project.image) }}" alt="{{ project.title }}" class="project-main-img">
+        </div>
+        
+        <div class="project-content">
+            <div class="project-documentation">
+                <h2>Documentación General</h2>
+                <p>{{ project.documentacion }}</p>
+            </div>
+            
+            <div class="project-subpages">
+                <h2>Detalles Técnicos</h2>
+                <div class="subpage-buttons">
+                    <a href="{{ url_for('project_subpage', project_id=project.id, subpage='preprocesamiento') }}" class="btn">
+                        <i class="fas fa-cogs"></i> Preprocesamiento
+                    </a>
+                    <a href="{{ url_for('project_subpage', project_id=project.id, subpage='analisis') }}" class="btn">
+                        <i class="fas fa-chart-line"></i> Análisis
+                    </a>
+                    <a href="{{ url_for('project_subpage', project_id=project.id, subpage='ml') }}" class="btn">
+                        <i class="fas fa-robot"></i> Machine Learning
+                    </a>
+                </div>
+            </div>
+            
+            <div class="project-tech">
+                <h2>Tecnologías Utilizadas</h2>
+                <ul class="tech-list">
+                    <li><i class="fab fa-python"></i> Python</li>
+                    <li><i class="fas fa-database"></i> PostgreSQL</li>
+                    <li><i class="fab fa-aws"></i> AWS</li>
+                    <li><i class="fas fa-brain"></i> TensorFlow</li>
+                    <li><i class="fas fa-chart-bar"></i> Matplotlib</li>
+                    <li><i class="fas fa-flask"></i> Flask</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

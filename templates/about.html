@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="about">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h1>Sobre Mí</h1>
+                <p>¡Hola! Soy un apasionado desarrollador con más de 5 años de experiencia creando soluciones tecnológicas innovadoras. Mi enfoque principal es el desarrollo backend con Python y la implementación de modelos de Machine Learning.</p>
+                
+                <p>Me gradué en Ciencias de la Computación en la Universidad Tecnológica, donde descubrí mi pasión por la inteligencia artificial y el análisis de datos. Desde entonces, he trabajado en diversos proyectos que van desde sistemas de recomendación hasta aplicaciones de procesamiento de lenguaje natural.</p>
+                
+                <div class="about-details">
+                    <div class="detail">
+                        <h3>Educación</h3>
+                        <ul>
+                            <li>Licenciatura en Ciencias de la Computación - Universidad Tecnológica (2015-2019)</li>
+                            <li>Máster en Inteligencia Artificial - Instituto Avanzado de Tecnología (2020-2021)</li>
+                            <li>Certificación AWS Solutions Architect</li>
+                        </ul>
+                    </div>
+                    <div class="detail">
+                        <h3>Experiencia</h3>
+                        <ul>
+                            <li>Data Scientist en TechSolutions Inc. (2021-Presente)</li>
+                            <li>Desarrollador Backend en InnovateStartup (2019-2021)</li>
+                            <li>Practicante en Machine Learning en DataLabs (2018-2019)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="{{ url_for('static', filename='img/profile.jpg') }}" alt="Mi foto de perfil">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials">
+    <div class="container">
+        <h2>Lo que dicen sobre mí</h2>
+        <div class="testimonial">
+            <p>"Un profesional excepcional que siempre entrega soluciones de alta calidad. Su capacidad para resolver problemas complejos es impresionante."</p>
+            <div class="testimonial-author">
+                <strong>María López</strong>
+                <span>Directora de Tecnología, TechSolutions</span>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Transformando ideas en soluciones digitales</h1>
+            <p>Desarrollador Full Stack especializado en Python, Flask y Machine Learning</p>
+            <div class="hero-btns">
+                <a href="{{ url_for('projects_page') }}" class="btn">Ver Proyectos</a>
+                <a href="{{ url_for('contact') }}" class="btn secondary">Contactar</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="circle"></div>
+            <img src="{{ url_for('static', filename='img/developer.png') }}" alt="Desarrollador">
+        </div>
+    </div>
+</section>
+
+<section class="skills">
+    <div class="container">
+        <h2>Habilidades Técnicas</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fab fa-python"></i>
+                <h3>Python</h3>
+                <p>Desarrollo de aplicaciones con Flask y Django, análisis de datos con Pandas y NumPy</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-brain"></i>
+                <h3>Machine Learning</h3>
+                <p>Modelos predictivos, procesamiento de lenguaje natural y visión por computadora</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-database"></i>
+                <h3>Bases de Datos</h3>
+                <p>SQL (PostgreSQL, MySQL), NoSQL (MongoDB), y diseño de modelos de datos</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-cloud"></i>
+                <h3>Cloud Computing</h3>
+                <p>Implementación de soluciones en AWS, Google Cloud y Azure</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="featured-projects">
+    <div class="container">
+        <h2>Proyectos Destacados</h2>
+        <div class="projects-grid">
+            {% for project in projects[:3] %}
+            <div class="project-card">
+                <img src="{{ url_for('static', filename='img/' + project.image) }}" alt="{{ project.title }}">
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description }}</p>
+                <a href="{{ url_for('project_detail', project_id=project.id) }}" class="btn small">Ver Detalles</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

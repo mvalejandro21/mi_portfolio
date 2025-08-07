@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="cv">
+    <div class="container">
+        <h1>Mi Currículum Vitae</h1>
+        
+        <div class="cv-container">
+            <div class="cv-preview">
+                <img src="{{ url_for('static', filename='img/cv-preview.png') }}" alt="Vista previa del CV">
+                <a href="{{ url_for('download_cv') }}" class="btn download-btn">
+                    <i class="fas fa-download"></i> Descargar CV
+                </a>
+            </div>
+            
+            <div class="cv-content">
+                <div class="cv-section">
+                    <h2>Experiencia Profesional</h2>
+                    <div class="cv-item">
+                        <h3>Data Scientist</h3>
+                        <h4>TechSolutions Inc. | 2021 - Presente</h4>
+                        <ul>
+                            <li>Desarrollo de modelos predictivos para análisis de clientes</li>
+                            <li>Implementación de pipelines de datos en AWS</li>
+                            <li>Creación de dashboards interactivos para visualización de datos</li>
+                        </ul>
+                    </div>
+                    <div class="cv-item">
+                        <h3>Desarrollador Backend</h3>
+                        <h4>InnovateStartup | 2019 - 2021</h4>
+                        <ul>
+                            <li>Diseño e implementación de API REST con Flask</li>
+                            <li>Integración de sistemas de autenticación y autorización</li>
+                            <li>Optimización de rendimiento de bases de datos</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="cv-section">
+                    <h2>Educación</h2>
+                    <div class="cv-item">
+                        <h3>Máster en Inteligencia Artificial</h3>
+                        <h4>Instituto Avanzado de Tecnología | 2020 - 2021</h4>
+                    </div>
+                    <div class="cv-item">
+                        <h3>Licenciatura en Ciencias de la Computación</h3>
+                        <h4>Universidad Tecnológica | 2015 - 2019</h4>
+                    </div>
+                </div>
+                
+                <div class="cv-section">
+                    <h2>Habilidades Técnicas</h2>
+                    <div class="skills-list">
+                        <div class="skill-category">
+                            <h3>Lenguajes de Programación</h3>
+                            <p>Python, JavaScript, SQL, Java</p>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Frameworks & Librerías</h3>
+                            <p>Flask, Django, TensorFlow, PyTorch, Pandas, NumPy</p>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Herramientas & Tecnologías</h3>
+                            <p>Docker, AWS, Git, MongoDB, PostgreSQL, Linux</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
