@@ -1,27 +1,44 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="light-mode">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alejandro Muñoz Valenzuela's Portfolio - {{ title if title else 'Analista de Datos' }}</title>
+    <title>Alejandro Muñoz Valenzuela | {{ title if title else 'Analista de Datos' }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=SF+Pro+Text:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
-    <header>
+    <div class="blur-overlay"></div>
+    
+    <header class="glass-navbar">
         <div class="container">
             <nav>
-                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Desarrollador", width="23">
-                <ul>
-                    <li><a href="{{ url_for('home') }}">Inicio</a></li>
-                    <li><a href="{{ url_for('about') }}">Sobre Mí</a></li>
-                    <li><a href="{{ url_for('cv') }}">CV</a></li>
-                    <li><a href="{{ url_for('projects_page') }}">Proyectos</a></li>
-                    <li><a href="{{ url_for('contact') }}">Contacto</a></li>
+                <a href="{{ url_for('home') }}" class="logo">
+                    <img src="{{ url_for('static', filename='img/logo-light.png') }}" alt="AMV" width="40" class="logo-img">
+                    <span class="logo-text">AMV</span>
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('home') }}" class="nav-link"><span class="link-number">01.</span> Inicio</a></li>
+                    <li><a href="{{ url_for('about') }}" class="nav-link"><span class="link-number">02.</span> Sobre Mí</a></li>
+                    <li><a href="{{ url_for('cv') }}" class="nav-link"><span class="link-number">03.</span> CV</a></li>
+                    <li><a href="{{ url_for('projects_page') }}" class="nav-link"><span class="link-number">04.</span> Proyectos</a></li>
+                    <li><a href="{{ url_for('contact') }}" class="nav-link"><span class="link-number">05.</span> Contacto</a></li>
                 </ul>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
+                
+                <div class="nav-actions">
+                    <button class="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                        <div class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
                 </div>
             </nav>
         </div>
@@ -31,29 +48,42 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer>
+    <footer class="glass-footer">
         <div class="container">
-            <p>&copy; 2023 Mi Portfolio. Todos los derechos reservados.</p>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="{{ url_for('static', filename='img/logo-light.png') }}" alt="AMV" width="30">
+                    <span>Alejandro Muñoz Valenzuela</span>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="{{ url_for('home') }}">Inicio</a>
+                    <a href="{{ url_for('about') }}">Sobre Mí</a>
+                    <a href="{{ url_for('cv') }}">CV</a>
+                    <a href="{{ url_for('projects_page') }}">Proyectos</a>
+                    <a href="{{ url_for('contact') }}">Contacto</a>
+                </div>
+                
+                <div class="footer-social">
+                    <a href="https://github.com/mvalejandro21" class="social-icon" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/alejandro-muñoz-valenzuela" class="social-icon" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:mvalejandro21@gmail.com" class="social-icon" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> Alejandro Muñoz Valenzuela. Todos los derechos reservados.</p>
+                <p>Creado con <i class="fas fa-heart"></i> en Barcelona</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Menú móvil
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('show');
-        });
-        
-        // Cerrar menú al hacer clic en un enlace
-        document.querySelectorAll('nav ul li a').forEach(item => {
-            item.addEventListener('click', () => {
-                document.querySelector('nav ul').classList.remove('show');
-            });
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
