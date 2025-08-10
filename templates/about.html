@@ -1,57 +1,126 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="about">
+<section class="about-section">
     <div class="container">
-        <div class="about-content">
-            <div class="about-text">
-                <h1>Sobre Mí</h1>
-                <p>Desde pequeño, siempre he sentido una gran curiosidad por el mundo del <strong>hardware y el software</strong>. Esa pasión me llevó a estudiar el grado de <strong>Sistemas Microinformáticos y Redes</strong>, donde descubrí mi interés por el hardware, las redes y los sistemas operativos.</p>
-                
-                <p>Más adelante decidí adentrarme en el mundo del desarrollo y cursé <strong>Desarrollo de Aplicaciones Multiplataforma (DAM)</strong>, aprendiendo tecnologías como HTML, CSS, Bash, Kotlin, SQL, Java, PHP, Odoo, Swift, C# y una introducción a Python. Fueron dos años de formación intensa en distintas formas de programación y desarrollo.</p>
-                
-                <p>Tras finalizar, realicé mis prácticas en una consultora de <strong>aplicaciones móviles</strong> trabajando con Flutter. Aunque lo dominé rápidamente, mi objetivo siempre fue otro: trabajar con datos. La oportunidad surgió cuando quise ayudar a mi padre, que tiene una pequeña tienda, creando una aplicación sencilla para digitalizar procesos y registrar datos con Python. Este proyecto personal despertó mi interés por el análisis de datos.</p>
-                
-                <p>Decidí formarme de manera profesional en un <strong>bootcamp de Análisis de Datos e Inteligencia Artificial</strong>, donde perfeccioné Python y aprendí sobre storytelling con datos, machine learning, estadística, visualización e informes. Mis bases en programación facilitaron la parte técnica, lo que me permitió centrarme en extraer y comunicar <em>insights</em> valiosos.</p>
-                
-                <p>Hoy, como <strong>analista de datos recién titulado</strong>, sigo desarrollando proyectos para mejorar mis habilidades y demostrar mi capacidad. Estoy en búsqueda de mi primera oportunidad profesional para aportar valor y crecer en este apasionante mundo de los datos.</p>
-                
-                <div class="about-details">
-                    <div class="detail">
-                        <h3>Educación</h3>
-                        <ul>
-                            <li>Grado Medio en Sistemas Microinformáticos y Redes</li>
-                            <li>Grado Superior en Desarrollo de Aplicaciones Multiplataforma</li>
-                            <li>Certificación IBM Data Analyst Professional Certificate</li>
-                            <li>Bootcamp de Análisis de Datos e Inteligencia Artificial</li>
-                        </ul>
-                    </div>
-                    <div class="detail">
-                        <h3>Experiencia</h3>
-                        <ul>
-                            <li>Prácticas como Desarrollador Flutter en Abalit</li>
-                            <li>Proyectos personales de análisis de datos y desarrollo en Python</li>
-                            <li>Aplicación de gestión y digitalización para comercio local</li>
-                        </ul>
-                    </div>
+        <div class="about-grid">
+            <div class="about-image animate-on-scroll">
+                <div class="image-wrapper">
+                    <img src="{{ url_for('static', filename='img/profile.jpg') }}" alt="Alejandro Muñoz Valenzuela" class="profile-image">
+                    <div class="image-border"></div>
+                    <div class="image-accent"></div>
                 </div>
             </div>
-            <div class="about-image">
-                <img src="{{ url_for('static', filename='img/profile.jpg') }}" alt="Mi foto de perfil">
+            
+            <div class="about-content animate-on-scroll" data-delay="0.1s">
+                <h1 class="section-title">
+                    <span class="title-number">02.</span> Sobre Mí
+                    <span class="title-line"></span>
+                </h1>
+                
+                <div class="about-text">
+                    <p class="intro-text">Analista de datos con formación técnica en desarrollo y pasión por transformar datos en decisiones.</p>
+                    
+                    <div class="bio-section">
+                        <p>Desde pequeño, siempre he sentido una gran curiosidad por el mundo del <strong>hardware y el software</strong>. Esa pasión me llevó a estudiar el grado de <strong>Sistemas Microinformáticos y Redes</strong>, donde descubrí mi interés por el hardware, las redes y los sistemas operativos.</p>
+                        
+                        <p>Más adelante decidí adentrarme en el mundo del desarrollo y cursé <strong>Desarrollo de Aplicaciones Multiplataforma (DAM)</strong>, aprendiendo tecnologías como HTML, CSS, Bash, Kotlin, SQL, Java, PHP, Odoo, Swift, C# y una introducción a Python.</p>
+                    </div>
+                    
+                    <div class="highlight-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <p>Mi proyecto personal para digitalizar la tienda de mi padre fue el punto de inflexión que me llevó al análisis de datos.</p>
+                    </div>
+                    
+                    <div class="bio-section">
+                        <p>Hoy, como <strong>analista de datos</strong>, combino mis conocimientos técnicos con la capacidad de extraer insights valiosos. Estoy en búsqueda de mi primera oportunidad profesional para crecer en este apasionante mundo.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="testimonials">
+<section class="details-section">
     <div class="container">
-        <h2>Lo que dicen sobre mí</h2>
-        <div class="testimonial">
-            <p>"Un profesional en crecimiento, con gran capacidad de aprendizaje y motivación por aportar soluciones basadas en datos."</p>
-            <div class="testimonial-author">
-                <strong>Mentor Académico</strong>
-                <span>Bootcamp de Análisis de Datos e IA</span>
+        <div class="details-grid animate-on-scroll">
+            <div class="detail-card">
+                <div class="card-header">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Educación</h3>
+                </div>
+                <ul class="detail-list">
+                    <li>
+                        <span class="detail-year">2024</span>
+                        <div>
+                            <h4>Bootcamp Análisis de Datos e IA</h4>
+                            <p>Upgrade Hub</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="detail-year">2022</span>
+                        <div>
+                            <h4>Desarrollo Aplicaciones Multiplataforma</h4>
+                            <p>La Salle Gràcia</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="detail-year">2019</span>
+                        <div>
+                            <h4>Sistemas Microinformáticos y Redes</h4>
+                            <p>Escola Pia Mataró</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
+            
+            <div class="detail-card">
+                <div class="card-header">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Experiencia</h3>
+                </div>
+                <ul class="detail-list">
+                    <li>
+                        <span class="detail-year">2023-24</span>
+                        <div>
+                            <h4>Desarrollador Flutter (Prácticas)</h4>
+                            <p>Abalit Technologies</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="detail-year">2022</span>
+                        <div>
+                            <h4>Proyectos Personales</h4>
+                            <p>Análisis de Datos en Python</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="detail-year">2019</span>
+                        <div>
+                            <h4>Técnico Mantenimiento Informático</h4>
+                            <p>Ordinas</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonial-section">
+    <div class="container">
+        <div class="testimonial-card animate-on-scroll">
+            <div class="quote-icon">
+                <i class="fas fa-quote-left"></i>
+            </div>
+            <blockquote>
+                <p>"Un profesional en crecimiento, con gran capacidad de aprendizaje y motivación por aportar soluciones basadas en datos."</p>
+                <footer>
+                    <strong>Mentor Académico</strong>
+                    <span>Bootcamp de Análisis de Datos e IA</span>
+                </footer>
+            </blockquote>
+            <div class="testimonial-decoration"></div>
         </div>
     </div>
 </section>
