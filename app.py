@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, send_file
+from flask import Flask, render_template, request, redirect, url_for, send_file, send_from_directory
 import os
 import json
 
@@ -9,6 +9,13 @@ app.secret_key = os.environ.get('SECRET_KEY', 'default_secret_key')
 with open('projects.json', 'r') as f:
     projects = json.load(f)
 
+
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                              'img/favicon.ico', mimetype='image/vnd.microsoft.icon')
 @app.route('/')
 def home():
     return render_template('index.html', projects=projects[:3])
