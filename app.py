@@ -3,6 +3,7 @@ import os
 import json
 
 app = Flask(__name__)
+app.secret_key = os.environ.get('SECRET_KEY', 'default_secret_key')
 
 # Cargar datos de proyectos desde JSON
 with open('projects.json', 'r') as f:
@@ -10,8 +11,7 @@ with open('projects.json', 'r') as f:
 
 @app.route('/')
 def home():
-       return render_template('index.html', projects=projects[:3])
-    
+    return render_template('index.html', projects=projects[:3])
 
 @app.route('/about')
 def about():
@@ -44,8 +44,7 @@ def project_subpage(project_id, subpage):
     if not project or subpage not in ['documentacion', 'preprocesamiento', 'analisis', 'ml']:
         return redirect(url_for('project_detail', project_id=project_id))
     
-    # Contenido específico para cada subpágina
-    content = project[subpage]
+    content = project.get(subpage, '')
     title = subpage.capitalize()
     
     return render_template('project_subpage.html', project=project, title=title, content=content)
@@ -55,10 +54,11 @@ def contact():
     if request.method == 'POST':
         name = request.form['name']
         email = request.form['email']
+        subject = request.form.get('subject', '')
         message = request.form['message']
-        # Aquí iría la lógica para enviar el correo
+        # Aquí pondrías la lógica para enviar correo, por ahora simplemente redirigimos con éxito
         return redirect(url_for('contact_success'))
-    return render_template('contact.html')
+    return render_template('contact.html', success=False)
 
 @app.route('/contact/success')
 def contact_success():

@@ -7,8 +7,8 @@
         
         <div class="cv-container">
             <div class="cv-preview">
-                <img src="{{ url_for('static', filename='img/cv-preview.png') }}" alt="Vista previa del CV">
-                <a href="{{ url_for('download_cv') }}" class="btn download-btn">
+                <embed src="{{ url_for('static', filename='docs/cv.pdf') }}" type="application/pdf" width="100%" height="800px" />
+                <a href="{{ url_for('static', filename='docs/cv.pdf') }}" class="btn download-btn" download>
                     <i class="fas fa-download"></i> Descargar CV
                 </a>
             </div>
