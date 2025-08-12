@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Tema claro/oscuro
-    const themeToggle = document.querySelector('.theme-toggle');
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
     
     
     // Menú móvil
