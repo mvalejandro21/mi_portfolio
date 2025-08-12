@@ -1,51 +1,102 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="project-detail">
+<section class="project-subpage-section">
     <div class="container">
-        <a href="{{ url_for('projects_page') }}" class="back-link">
-            <i class="fas fa-arrow-left"></i> Volver a Proyectos
+        <!-- Botón de volver -->
+        <a href="{{ url_for('project_detail', project_id=project.id) }}" class="back-link animate-on-scroll">
+            <i class="fas fa-arrow-left"></i> Volver al proyecto
         </a>
         
-        <div class="project-header">
-            <h1>{{ project.title }}</h1>
-            <p class="project-description">{{ project.description }}</p>
-            <img src="{{ url_for('static', filename='img/' + project.image) }}" alt="{{ project.title }}" class="project-main-img">
+        <!-- Encabezado -->
+        <div class="subpage-header animate-on-scroll" data-delay="0.1s">
+            <div class="subpage-breadcrumb">
+                <span>{{ project.title }}</span>
+                <i class="fas fa-chevron-right"></i>
+                <span class="current-page">{{ title }}</span>
+            </div>
+            <h1 class="subpage-title">
+                <span class="title-icon">
+                    {% if title == 'Preprocesamiento' %}
+                    <i class="fas fa-cogs"></i>
+                    {% elif title == 'Analisis' %}
+                    <i class="fas fa-chart-line"></i>
+                    {% else %}
+                    <i class="fas fa-robot"></i>
+                    {% endif %}
+                </span>
+                {{ title }}
+            </h1>
         </div>
         
-        <div class="project-content">
-            <div class="project-documentation">
-                <h2>Documentación General</h2>
-                <p>{{ project.documentacion }}</p>
-            </div>
-            
-            <div class="project-subpages">
-                <h2>Detalles Técnicos</h2>
-                <div class="subpage-buttons">
-                    <a href="{{ url_for('project_subpage', project_id=project.id, subpage='preprocesamiento') }}" class="btn">
-                        <i class="fas fa-cogs"></i> Preprocesamiento
-                    </a>
-                    <a href="{{ url_for('project_subpage', project_id=project.id, subpage='analisis') }}" class="btn">
-                        <i class="fas fa-chart-line"></i> Análisis
-                    </a>
-                    <a href="{{ url_for('project_subpage', project_id=project.id, subpage='ml') }}" class="btn">
-                        <i class="fas fa-robot"></i> Machine Learning
-                    </a>
+        <!-- Contenido principal -->
+        <div class="subpage-content-grid">
+            <!-- Texto/documentación -->
+            <article class="subpage-documentation animate-on-scroll" data-delay="0.2s">
+                <div class="documentation-content">
+                    {{ content|safe }}
                 </div>
-            </div>
+                
+                <!-- Sección de recursos -->
+                <div class="resources-section">
+                    <h3 class="resources-title">
+                        <i class="fas fa-paperclip"></i> Recursos relacionados
+                    </h3>
+                    <div class="resources-grid">
+                        <a href="#" class="resource-card">
+                            <i class="far fa-file-pdf"></i>
+                            <span>Documentación técnica</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fab fa-github"></i>
+                            <span>Código fuente</span>
+                        </a>
+                        <a href="#" class="resource-card">
+                            <i class="fas fa-database"></i>
+                            <span>Dataset utilizado</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
             
-            <div class="project-tech">
-                <h2>Tecnologías Utilizadas</h2>
-                <ul class="tech-list">
-                    <li><i class="fab fa-python"></i> Python</li>
-                    <li><i class="fas fa-database"></i> PostgreSQL</li>
-                    <li><i class="fab fa-aws"></i> AWS</li>
-                    <li><i class="fas fa-brain"></i> TensorFlow</li>
-                    <li><i class="fas fa-chart-bar"></i> Matplotlib</li>
-                    <li><i class="fas fa-flask"></i> Flask</li>
-                </ul>
-            </div>
+            <!-- Imagen/visualización -->
+            <aside class="subpage-visualization animate-on-scroll" data-delay="0.3s">
+                <div class="visualization-container">
+                    {% if title == 'Preprocesamiento' %}
+                    <img src="{{ url_for('static', filename='img/data-processing.jpg') }}" 
+                         alt="Procesamiento de datos" class="visualization-image">
+                    {% elif title == 'Analisis' %}
+                    <img src="{{ url_for('static', filename='img/data-analysis.jpg') }}" 
+                         alt="Análisis de datos" class="visualization-image">
+                    {% else %}
+                    <img src="{{ url_for('static', filename='img/ml-model.jpg') }}" 
+                         alt="Modelo de Machine Learning" class="visualization-image">
+                    {% endif %}
+                    <div class="image-caption">
+                        Ilustración del proceso de {{ title|lower }}
+                    </div>
+                </div>
+            </aside>
         </div>
+        
+        <!-- Navegación entre secciones -->
+        <nav class="subpage-navigation animate-on-scroll" data-delay="0.4s">
+            <a href="{{ url_for('project_subpage', project_id=project.id, subpage='preprocesamiento') }}" 
+               class="nav-btn {% if title == 'Preprocesamiento' %}active{% endif %}">
+                <i class="fas fa-cogs"></i>
+                <span>Preprocesamiento</span>
+            </a>
+            <a href="{{ url_for('project_subpage', project_id=project.id, subpage='analisis') }}" 
+               class="nav-btn {% if title == 'Analisis' %}active{% endif %}">
+                <i class="fas fa-chart-line"></i>
+                <span>Análisis</span>
+            </a>
+            <a href="{{ url_for('project_subpage', project_id=project.id, subpage='ml') }}" 
+               class="nav-btn {% if title == 'Ml' %}active{% endif %}">
+                <i class="fas fa-robot"></i>
+                <span>Machine Learning</span>
+            </a>
+        </nav>
     </div>
 </section>
 {% endblock %}
