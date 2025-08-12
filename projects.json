@@ -1,33 +1,107 @@
-[
+{
+  "projects": [
     {
-        "id": 1,
-        "title": "Sistema de Recomendación",
-        "description": "Sistema de recomendación basado en filtrado colaborativo",
-        "image": "recommendation.jpg",
-        "documentacion": "Este proyecto implementa un sistema de recomendación para productos de e-commerce utilizando técnicas avanzadas de machine learning...",
-        "preprocesamiento": "Para el preprocesamiento de datos, realizamos limpieza de valores nulos, normalización de características y codificación de variables categóricas...",
-        "analisis": "El análisis exploratorio de datos reveló patrones interesantes en el comportamiento de los usuarios, identificando correlaciones entre características demográficas y preferencias de productos...",
-        "ml": "Implementamos un modelo de factorización matricial con TensorFlow, logrando un RMSE de 0.85 en el conjunto de prueba..."
+      "id": 1,
+      "title": "Sistema de Recomendación para E-commerce",
+      "subtitle": "Modelo de machine learning para personalizar recomendaciones de productos",
+      "category": "Machine Learning",
+      "date": "Noviembre 2023",
+      "image": "ecommerce-recommendation.jpg",
+      "github_url": "https://github.com/tuuser/ecommerce-recommender",
+      "live_url": "https://demo-ecommerce-recommender.com",
+      "documentation": "<p>Este proyecto desarrolla un sistema de recomendación híbrido para una plataforma de e-commerce, combinando filtrado colaborativo y basado en contenido. El objetivo principal era mejorar la experiencia de usuario y aumentar las ventas cruzadas mediante recomendaciones personalizadas.</p><p>El sistema procesa datos históricos de compras, interacciones de usuarios y características de productos para generar recomendaciones en tiempo real. Implementamos una arquitectura escalable que permite actualizar el modelo periódicamente con nuevos datos.</p>",
+      "preprocessing": "<h4>Limpieza y Transformación de Datos</h4><p>El dataset inicial contenía 2.5 millones de interacciones de usuarios con 50,000 productos diferentes. Realizamos:</p><ul><li>Limpieza de valores atípicos en las valoraciones</li><li>Codificación de características categóricas</li><li>Normalización de características numéricas</li><li>Tratamiento de datos faltantes mediante imputación</li></ul><h4>Ingeniería de Características</h4><p>Desarrollamos nuevas características como:</p><ul><li>Popularidad temporal de productos</li><li>Similitud entre usuarios basada en historial de navegación</li><li>Embeddings de categorías de productos</li></ul>",
+      "analysis": "<h4>Análisis Exploratorio</h4><p>El EDA reveló patrones interesantes:</p><ul><li>El 80% de las compras provienen del 20% de los usuarios</li><li>La mayoría de usuarios interactúa con menos de 10 productos antes de comprar</li><li>Existe estacionalidad marcada en ciertas categorías</li></ul><h4>Visualizaciones Clave</h4><p>Generamos dashboards interactivos para:</p><ul><li>Distribución de interacciones por categoría</li><li>Mapas de calor de patrones de compra</li><li>Análisis de cohortes para retención de usuarios</li></ul>",
+      "modeling": "<h4>Arquitectura del Modelo</h4><p>Implementamos un enfoque híbrido:</p><ul><li>Filtrado colaborativo usando factorización matricial</li><li>Modelo basado en contenido con embeddings de productos</li><li>Sistema de ranking para combinar ambas aproximaciones</li></ul><h4>Resultados</h4><p>El modelo final logró:</p><ul><li>Precisión@10 del 78%</li><li>Incremento del 22% en ventas cruzadas</li><li>Tiempo de inferencia < 100ms</li></ul>",
+      "technologies": [
+        {
+          "name": "Python",
+          "icon": "fab fa-python",
+          "description": "Uso de Pandas, NumPy y Scikit-learn para procesamiento y modelado"
+        },
+        {
+          "name": "TensorFlow",
+          "icon": "fas fa-brain",
+          "description": "Implementación de redes neuronales para embeddings"
+        },
+        {
+          "name": "PostgreSQL",
+          "icon": "fas fa-database",
+          "description": "Almacenamiento y consulta de datos de interacciones"
+        },
+        {
+          "name": "FastAPI",
+          "icon": "fas fa-server",
+          "description": "API para servir recomendaciones en tiempo real"
+        },
+        {
+          "name": "Docker",
+          "icon": "fab fa-docker",
+          "description": "Contenerización de los servicios"
+        }
+      ],
+      "stats": {
+        "dataset_size": "2.5M registros",
+        "duration": "3 meses",
+        "accuracy": "78% (Precision@10)"
+      },
+      "lessons_learned": [
+        "La combinación de enfoques colaborativos y basados en contenido produce mejores resultados",
+        "La calidad de los embeddings es crítica para el rendimiento",
+        "El sistema necesita actualización frecuente para mantener relevancia"
+      ],
+      "gallery": [
+        {
+          "url": "recommendation-architecture.jpg",
+          "caption": "Arquitectura del sistema de recomendación"
+        },
+        {
+          "url": "accuracy-metrics.jpg",
+          "caption": "Métricas de evaluación del modelo"
+        },
+        {
+          "url": "dashboard-screenshot.jpg",
+          "caption": "Dashboard de monitoreo de recomendaciones"
+        }
+      ]
     },
     {
-        "id": 2,
-        "title": "Detección de Fraudes",
-        "description": "Modelo predictivo para detección de transacciones fraudulentas",
-        "image": "fraud.jpg",
-        "documentacion": "Este proyecto desarrolla un sistema de detección de transacciones fraudulentas en tiempo real utilizando técnicas de aprendizaje automático...",
-        "preprocesamiento": "El preprocesamiento incluyó manejo de desbalance de clases mediante SMOTE, escalado de características y reducción de dimensionalidad con PCA...",
-        "analisis": "El análisis de patrones de fraude reveló que la mayoría de las transacciones fraudulentas ocurren en ciertos rangos horarios y con montos específicos...",
-        "ml": "Utilizamos un modelo de Gradient Boosting con XGBoost que alcanzó una precisión del 98.7% y un recall del 92.5%..."
-    },
-    {
-        "id": 3,
-        "title": "Análisis de Sentimientos",
-        "description": "Clasificación de opiniones de clientes en redes sociales",
-        "image": "sentiment.jpg",
-        "documentacion": "Sistema de análisis de sentimientos que clasifica comentarios de clientes en positivos, negativos o neutrales...",
-        "preprocesamiento": "Preprocesamiento de texto incluyó tokenización, eliminación de stopwords, lematización y creación de embeddings con Word2Vec...",
-        "analisis": "El análisis mostró que los clientes mencionan con mayor frecuencia aspectos relacionados con la atención al cliente y tiempos de entrega...",
-        "ml": "Implementamos un modelo de redes neuronales convolucionales (CNN) para texto que logró una precisión del 89% en el conjunto de validación..."
+      "id": 2,
+      "title": "Análisis de Sentimiento en Redes Sociales",
+      "subtitle": "Clasificación de opiniones sobre productos tecnológicos",
+      "category": "NLP",
+      "date": "Marzo 2023",
+      "image": "sentiment-analysis.jpg",
+      "github_url": "https://github.com/tuuser/sentiment-analysis",
+      "documentation": "<p>Este proyecto implementa un sistema de análisis de sentimiento para clasificar opiniones de usuarios sobre productos tecnológicos en redes sociales. El modelo procesa texto en español e inglés, identificando polaridad (positivo, neutral, negativo) y aspectos específicos mencionados.</p><p>El sistema fue entrenado con un dataset de 150,000 tweets y reseñas de productos, utilizando técnicas avanzadas de procesamiento de lenguaje natural.</p>",
+      "preprocessing": "<h4>Preprocesamiento de Texto</h4><p>Realizamos:</p><ul><li>Tokenización multilingüe</li><li>Lematización y eliminación de stopwords</li><li>Tratamiento de emoticonos y jerga de redes</li><li>Extracción de n-gramas relevantes</li></ul>",
+      "analysis": "<h4>Distribución de Sentimientos</h4><p>El análisis inicial mostró:</p><ul><li>60% opiniones neutrales</li><li>25% positivas</li><li>15% negativas</li></ul>",
+      "modeling": "<h4>Modelo Final</h4><p>BERT multilingüe fine-tuned con:</p><ul><li>Exactitud: 89%</li><li>F1-score: 0.87</li></ul>",
+      "technologies": [
+        {
+          "name": "Transformers",
+          "icon": "fas fa-robot"
+        },
+        {
+          "name": "spaCy",
+          "icon": "fas fa-language"
+        },
+        {
+          "name": "AWS SageMaker",
+          "icon": "fab fa-aws"
+        }
+      ],
+      "stats": {
+        "dataset_size": "150K textos",
+        "duration": "2 meses",
+        "accuracy": "89%"
+      },
+      "gallery": [
+        {
+          "url": "sentiment-distribution.jpg",
+          "caption": "Distribución de sentimientos por producto"
+        }
+      ]
     }
-   
-]
+  ]
+}
