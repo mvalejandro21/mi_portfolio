@@ -1,143 +1,50 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="project-detail-section">
+<section class="project-detail">
     <div class="container">
-        <a href="{{ url_for('projects_page') }}" class="back-link animate-on-scroll">
+        <a href="{{ url_for('projects_page') }}" class="back-link">
             <i class="fas fa-arrow-left"></i> Volver a Proyectos
         </a>
         
-        <div class="project-header animate-on-scroll" data-delay="0.1s">
-            <div class="project-meta">
-                <span class="project-category">{{ project.category }}</span>
-                <span class="project-date">{{ project.date }}</span>
-            </div>
-            <h1 class="project-title">{{ project.title }}</h1>
-            <p class="project-subtitle">{{ project.subtitle }}</p>
-            
-            <div class="project-hero">
-                <img src="{{ url_for('static', filename='img/' + project.image) }}" alt="{{ project.title }}" class="project-main-img">
-                <div class="project-links">
-                    {% if project.github_url %}
-                    <a href="{{ project.github_url }}" class="btn outline" target="_blank">
-                        <i class="fab fa-github"></i> Ver código
-                    </a>
-                    {% endif %}
-                    {% if project.live_url %}
-                    <a href="{{ project.live_url }}" class="btn" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Ver demo
-                    </a>
-                    {% endif %}
-                </div>
-            </div>
+        <div class="project-header">
+            <h1>{{ project.title }}</h1>
+            <p class="project-description">{{ project.description }}</p>
+            <img src="{{ url_for('static', filename='img/' + project.image) }}" alt="{{ project.title }}" class="project-main-img">
         </div>
         
-        <div class="project-content-grid">
-            <div class="project-article">
-                <article class="project-documentation">
-                    <h2 class="section-title">
-                        <span class="title-number">01.</span> Descripción del Proyecto
-                        <span class="title-line"></span>
-                    </h2>
-                    <div class="article-content">
-                        {{ project.documentation|safe }}
-                    </div>
-                    
-                    <div class="gallery">
-                        {% for image in project.gallery %}
-                        <figure class="gallery-item">
-                            <img src="{{ url_for('static', filename='img/' + image.url) }}" alt="{{ image.caption }}">
-                            {% if image.caption %}
-                            <figcaption>{{ image.caption }}</figcaption>
-                            {% endif %}
-                        </figure>
-                        {% endfor %}
-                    </div>
-                </article>
-                
-                <section class="project-technical">
-                    <h2 class="section-title">
-                        <span class="title-number">02.</span> Detalles Técnicos
-                        <span class="title-line"></span>
-                    </h2>
-                    
-                    <div class="technical-sections">
-                        <div class="technical-section" id="preprocesamiento">
-                            <h3>Preprocesamiento de Datos</h3>
-                            <div class="section-content">
-                                {{ project.preprocessing|safe }}
-                            </div>
-                        </div>
-                        
-                        <div class="technical-section" id="analisis">
-                            <h3>Análisis Exploratorio</h3>
-                            <div class="section-content">
-                                {{ project.analysis|safe }}
-                            </div>
-                        </div>
-                        
-                        <div class="technical-section" id="modelado">
-                            <h3>Modelado y Resultados</h3>
-                            <div class="section-content">
-                                {{ project.modeling|safe }}
-                            </div>
-                        </div>
-                    </div>
-                </section>
+        <div class="project-content">
+            <div class="project-documentation">
+                <h2>Documentación General</h2>
+                <p>{{ project.documentacion }}</p>
             </div>
             
-            <aside class="project-sidebar">
-                <div class="sidebar-card">
-                    <h3>Tecnologías Clave</h3>
-                    <ul class="tech-list">
-                        {% for tech in project.technologies %}
-                        <li>
-                            <i class="{{ tech.icon }}"></i>
-                            <span>{{ tech.name }}</span>
-                            {% if tech.description %}
-                            <div class="tech-tooltip">{{ tech.description }}</div>
-                            {% endif %}
-                        </li>
-                        {% endfor %}
-                    </ul>
+            <div class="project-subpages">
+                <h2>Detalles Técnicos</h2>
+                <div class="subpage-buttons">
+                    <a href="{{ url_for('project_subpage', project_id=project.id, subpage='preprocesamiento') }}" class="btn">
+                        <i class="fas fa-cogs"></i> Preprocesamiento
+                    </a>
+                    <a href="{{ url_for('project_subpage', project_id=project.id, subpage='analisis') }}" class="btn">
+                        <i class="fas fa-chart-line"></i> Análisis
+                    </a>
+                    <a href="{{ url_for('project_subpage', project_id=project.id, subpage='ml') }}" class="btn">
+                        <i class="fas fa-robot"></i> Machine Learning
+                    </a>
                 </div>
-                
-                <div class="sidebar-card">
-                    <h3>Datos del Proyecto</h3>
-                    <div class="project-stats">
-                        <div class="stat-item">
-                            <i class="fas fa-database"></i>
-                            <div>
-                                <span>Tamaño del dataset</span>
-                                <strong>{{ project.stats.dataset_size }}</strong>
-                            </div>
-                        </div>
-                        <div class="stat-item">
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <span>Duración</span>
-                                <strong>{{ project.stats.duration }}</strong>
-                            </div>
-                        </div>
-                        <div class="stat-item">
-                            <i class="fas fa-chart-line"></i>
-                            <div>
-                                <span>Precisión del modelo</span>
-                                <strong>{{ project.stats.accuracy }}</strong>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="sidebar-card">
-                    <h3>Lecciones Aprendidas</h3>
-                    <ul class="lessons-list">
-                        {% for lesson in project.lessons_learned %}
-                        <li>{{ lesson }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </aside>
+            </div>
+            
+            <div class="project-tech">
+                <h2>Tecnologías Utilizadas</h2>
+                <ul class="tech-list">
+                    <li><i class="fab fa-python"></i> Python</li>
+                    <li><i class="fas fa-database"></i> PostgreSQL</li>
+                    <li><i class="fab fa-aws"></i> AWS</li>
+                    <li><i class="fas fa-brain"></i> TensorFlow</li>
+                    <li><i class="fas fa-chart-bar"></i> Matplotlib</li>
+                    <li><i class="fas fa-flask"></i> Flask</li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
