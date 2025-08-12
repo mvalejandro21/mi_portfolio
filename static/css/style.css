@@ -7,13 +7,6 @@
     --light-accent: #0071e3;
     --light-accent-hover: #0077ed;
     
-    /* Colores oscuros */
-    --dark-primary:  #f5f5f7;
-    --dark-secondary: #e5e5e7;
-    --dark-tertiary:#d2d2d7;
-    --dark-text: #1d1d1f;
-    --dark-accent: #0071e3;
-    --dark-accent-hover: #0077ed;
     
     /* Variables actuales */
     --primary: var(--light-primary);
@@ -391,15 +384,7 @@
         font-size: 2rem;
     }
 }
-/* Modo oscuro */
-.dark-mode {
-    --primary: var(--dark-primary);
-    --secondary: var(--dark-secondary);
-    --tertiary: var(--dark-tertiary);
-    --text: var(--dark-text);
-    --accent: var(--dark-accent);
-    --accent-hover: var(--dark-accent-hover);
-}
+
 
 /* Reset y estilos base */
 * {
