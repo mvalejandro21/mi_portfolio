@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="project-section-detail">
+    <div class="container">
+        <div class="section-spacer"></div>
+        
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            <a href="{{ url_for('index') }}">Proyectos</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="{{ url_for('project_detail', project_id=project.id) }}">{{ project.title }}</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Preprocesamiento</span>
+        </nav>
+        
+        <h1>Preprocesamiento de Datos</h1>
+        
+        <div class="section-content">
+            {{ project.preprocessing_content|safe }}
+        </div>
+        
+        <div class="section-footer">
+            <a href="{{ url_for('project_detail', project_id=project.id) }}" class="btn outline">
+                <i class="fas fa-arrow-left"></i> Volver al proyecto
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

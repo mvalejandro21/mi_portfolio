@@ -12,20 +12,47 @@
                 <span class="title-number">03.</span> Mis Proyectos
                 <span class="title-line"></span>
             </h1>
-            <p class="section-subtitle">Explora mis trabajos más recientes en desarrollo de software y machine learning</p>
+            <p class="section-subtitle">Explora mis proyectos de Data Science, Machine Learning y Desarrollo</p>
+        </div>
+
+        <!-- Filtros por categoría -->
+        <div class="project-filters">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="data-science">Data Science</button>
+            <button class="filter-btn" data-filter="machine-learning">Machine Learning</button>
+            <button class="filter-btn" data-filter="web-development">Web Development</button>
         </div>
 
         <!-- Grid de Proyectos -->
         <div class="projects-grid">
             {% for project in projects %}
-            <div class="project-card">
+            <div class="project-card" data-category="{{ project.category|lower|replace(' ', '-') }}">
                 <div class="card-image-container">
-                    <img src="{{ url_for('static', filename='img/' + project.image) }}" 
+                    <img src="{{ url_for('static', filename='img/projects/' + project.image) }}" 
                          alt="{{ project.title }}" class="project-image">
                     <div class="image-overlay"></div>
                     {% if project.category %}
                     <div class="project-category">{{ project.category }}</div>
                     {% endif %}
+                    
+                    <!-- Badge de características -->
+                    <div class="project-features">
+                        {% if project.has_preprocessing %}
+                        <span class="feature-badge" title="Incluye sección de preprocesamiento">
+                            <i class="fas fa-cogs"></i>
+                        </span>
+                        {% endif %}
+                        {% if project.has_analysis %}
+                        <span class="feature-badge" title="Incluye análisis exploratorio">
+                            <i class="fas fa-chart-bar"></i>
+                        </span>
+                        {% endif %}
+                        {% if project.has_ml %}
+                        <span class="feature-badge" title="Incluye modelos de ML">
+                            <i class="fas fa-brain"></i>
+                        </span>
+                        {% endif %}
+                    </div>
                 </div>
                 
                 <div class="card-content">
@@ -42,6 +69,11 @@
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
                             {% endif %}
+                            {% if project.dataset_url %}
+                            <a href="{{ project.dataset_url }}" class="link-icon" aria-label="Dataset" target="_blank">
+                                <i class="fas fa-database"></i>
+                            </a>
+                            {% endif %}
                         </div>
                     </div>
                     
@@ -55,14 +87,66 @@
                     </div>
                     {% endif %}
                     
-                    <a href="{{ url_for('project_detail', project_id=project.id) }}" class="btn outline">
-                        <span>Ver detalles</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
+                    <div class="card-footer">
+                        <a href="{{ url_for('project_detail', project_id=project.id) }}" class="btn outline">
+                            <span>Ver detalles</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        {% if project.demo_url %}
+                        <a href="{{ project.demo_url }}" class="btn primary demo-btn" target="_blank">
+                            <i class="fas fa-play"></i> Demo
+                        </a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
             {% endfor %}
         </div>
+        
+        <!-- Mensaje cuando no hay proyectos en una categoría -->
+        <div class="no-projects-message" style="display: none;">
+            <p>No hay proyectos en esta categoría actualmente.</p>
+        </div>
     </div>
 </section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Filtrado de proyectos por categoría
+document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    const noProjectsMessage = document.querySelector('.no-projects-message');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Actualizar botones activos
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            const filterValue = this.getAttribute('data-filter');
+            let visibleProjects = 0;
+            
+            // Filtrar proyectos
+            projectCards.forEach(card => {
+                if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                    card.style.display = 'block';
+                    visibleProjects++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Mostrar mensaje si no hay proyectos
+            if (visibleProjects === 0) {
+                noProjectsMessage.style.display = 'block';
+            } else {
+                noProjectsMessage.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
 {% endblock %}
