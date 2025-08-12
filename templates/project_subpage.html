@@ -40,12 +40,12 @@
                 
                 <!-- Acción específica según la sección -->
                 <div class="action-section">
-                    {% if title == 'Machine Learning' %}
+                    {% if subpage == 'ml' %}
                     <a href="{{ project.demo_url }}" class="action-btn" target="_blank">
                         <i class="fas fa-external-link-alt"></i>
                         <span>Ver demo en vivo</span>
                     </a>
-                    {% elif title == 'Análisis' %}
+                    {% elif subpage == 'analisis' %}
                     <a href="{{ project.dashboard_url }}" class="action-btn" download>
                         <i class="fas fa-download"></i>
                         <span>Descargar dashboard</span>

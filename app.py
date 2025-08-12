@@ -45,16 +45,34 @@ def project_detail(project_id):
         return redirect(url_for('projects_page'))
     return render_template('project_detail.html', project=project)
 
-@app.route('/project/<int:project_id>/<subpage>')
+@app.route('/proyecto/<int:project_id>/<subpage>')
 def project_subpage(project_id, subpage):
-    project = next((p for p in projects if p['id'] == project_id), None)
-    if not project or subpage not in ['documentacion', 'preprocesamiento', 'analisis', 'ml']:
-        return redirect(url_for('project_detail', project_id=project_id))
+    project = next((p for p in projects_data if p['id'] == project_id), None)
+    if not project:
+        abort(404)
     
-    content = project.get(subpage, '')
-    title = subpage.capitalize()
+    # Determinar el título basado en la subpágina
+    titles = {
+        'preprocesamiento': 'Preprocesamiento',
+        'analisis': 'Análisis',
+        'ml': 'Machine Learning'
+    }
+    title = titles.get(subpage, 'Proyecto')
     
-    return render_template('project_subpage.html', project=project, title=title, content=content)
+    # Obtener el contenido correcto
+    content_key = {
+        'preprocesamiento': 'preprocesamiento',
+        'analisis': 'analisis',
+        'ml': 'ml'
+    }.get(subpage)
+    
+    content = project.get(content_key, 'Contenido no disponible')
+    
+    return render_template('project_subpage.html', 
+                         project=project,
+                         title=title,
+                         subpage=subpage,  # Asegúrate de pasar esto
+                         content=content)
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
