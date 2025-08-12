@@ -1,50 +1,87 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="project-detail">
+<section class="projects-section">
     <div class="container">
-        <a href="{{ url_for('projects_page') }}" class="back-link">
-            <i class="fas fa-arrow-left"></i> Volver a Proyectos
-        </a>
-        
-        <div class="project-header">
-            <h1>{{ project.title }}</h1>
-            <p class="project-description">{{ project.description }}</p>
-            <img src="{{ url_for('static', filename='img/' + project.image) }}" alt="{{ project.title }}" class="project-main-img">
+        <div class="section-header">
+            <h1 class="section-title">
+                <span class="title-number">03.</span> Proyectos Destacados
+                <span class="title-line"></span>
+            </h1>
+            <p class="section-subtitle">Explora mis trabajos en análisis de datos, visualización y desarrollo</p>
         </div>
-        
-        <div class="project-content">
-            <div class="project-documentation">
-                <h2>Documentación General</h2>
-                <p>{{ project.documentacion }}</p>
+
+        <!-- Documentación General -->
+        <div class="documentation-section">
+            <h2 class="docs-title">Documentación General</h2>
+            <div class="docs-content">
+                <p>En esta sección encontrarás una visión general de mis proyectos más relevantes. Cada proyecto incluye:</p>
+                <ul class="docs-features">
+                    <li><i class="fas fa-check-circle"></i> Objetivos y alcance del proyecto</li>
+                    <li><i class="fas fa-check-circle"></i> Tecnologías utilizadas</li>
+                    <li><i class="fas fa-check-circle"></i> Resultados obtenidos</li>
+                    <li><i class="fas fa-check-circle"></i> Lecciones aprendidas</li>
+                </ul>
+                <p>Selecciona cualquier proyecto para ver los detalles técnicos completos, incluyendo metodología, análisis y resultados.</p>
             </div>
-            
-            <div class="project-subpages">
-                <h2>Detalles Técnicos</h2>
-                <div class="subpage-buttons">
-                    <a href="{{ url_for('project_subpage', project_id=project.id, subpage='preprocesamiento') }}" class="btn">
-                        <i class="fas fa-cogs"></i> Preprocesamiento
-                    </a>
-                    <a href="{{ url_for('project_subpage', project_id=project.id, subpage='analisis') }}" class="btn">
-                        <i class="fas fa-chart-line"></i> Análisis
-                    </a>
-                    <a href="{{ url_for('project_subpage', project_id=project.id, subpage='ml') }}" class="btn">
-                        <i class="fas fa-robot"></i> Machine Learning
-                    </a>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="action-buttons">
+            <a href="#" class="btn primary">
+                <i class="fas fa-file-pdf"></i> Descargar Portfolio Completo
+            </a>
+            <a href="{{ url_for('contact') }}" class="btn secondary">
+                <i class="fas fa-envelope"></i> Contactar sobre Proyectos
+            </a>
+        </div>
+
+        <!-- Grid de Proyectos -->
+        <div class="projects-grid">
+            {% for project in projects %}
+            <div class="project-card">
+                <div class="card-image-container">
+                    <img src="{{ url_for('static', filename='img/' + project.image) }}" alt="{{ project.title }}" class="project-image">
+                    <div class="image-overlay"></div>
+                    <div class="project-category">{{ project.category }}</div>
+                </div>
+                
+                <div class="card-content">
+                    <div class="card-header">
+                        <h3>{{ project.title }}</h3>
+                        <div class="project-links">
+                            {% if project.github_url %}
+                            <a href="{{ project.github_url }}" class="link-icon" aria-label="GitHub" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            {% endif %}
+                            {% if project.live_url %}
+                            <a href="{{ project.live_url }}" class="link-icon" aria-label="Live Demo" target="_blank">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <p class="project-description">{{ project.description }}</p>
+                    
+                    <div class="tech-tags">
+                        {% for tag in project.tags.split(',') %}
+                        <span class="tech-tag">{{ tag.strip() }}</span>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="card-actions">
+                        <a href="{{ url_for('project_detail', project_id=project.id) }}" class="btn outline">
+                            <i class="fas fa-book-open"></i> Documentación
+                        </a>
+                        <a href="{{ url_for('project_detail', project_id=project.id) }}" class="btn">
+                            <i class="fas fa-chevron-right"></i> Ver detalles
+                        </a>
+                    </div>
                 </div>
             </div>
-            
-            <div class="project-tech">
-                <h2>Tecnologías Utilizadas</h2>
-                <ul class="tech-list">
-                    <li><i class="fab fa-python"></i> Python</li>
-                    <li><i class="fas fa-database"></i> PostgreSQL</li>
-                    <li><i class="fab fa-aws"></i> AWS</li>
-                    <li><i class="fas fa-brain"></i> TensorFlow</li>
-                    <li><i class="fas fa-chart-bar"></i> Matplotlib</li>
-                    <li><i class="fas fa-flask"></i> Flask</li>
-                </ul>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>

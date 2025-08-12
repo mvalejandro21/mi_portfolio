@@ -37,6 +37,106 @@
     --transition-slow: 0.5s ease;
 }
 
+/* Documentación General */
+.documentation-section {
+    background-color: white;
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(29, 29, 31, 0.1);
+}
+
+.docs-title {
+    font-size: 1.8rem;
+    color: #1d1d1f;
+    margin-bottom: 20px;
+    font-family: 'SF Pro Display', sans-serif;
+}
+
+.docs-content {
+    line-height: 1.8;
+    color: #515154;
+}
+
+.docs-features {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+}
+
+.docs-features li {
+    margin-bottom: 12px;
+    padding-left: 30px;
+    position: relative;
+}
+
+.docs-features i {
+    color: #0071e3;
+    position: absolute;
+    left: 0;
+    top: 4px;
+}
+
+/* Botones de Acción */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.btn.primary {
+    background-color: #0071e3;
+    color: white;
+}
+
+.btn.secondary {
+    background-color: transparent;
+    border: 1px solid #0071e3;
+    color: #0071e3;
+}
+
+.btn i {
+    margin-right: 8px;
+}
+
+/* Acciones de Tarjeta */
+.card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.card-actions .btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .documentation-section {
+        padding: 20px;
+    }
+    
+    .docs-title {
+        font-size: 1.5rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .action-buttons .btn {
+        width: 100%;
+    }
+    
+    .card-actions {
+        flex-direction: column;
+    }
+}
 .projects-section {
     padding: 4rem 1.5rem;
     background: linear-gradient(to bottom, #f9f9f9, #f1f1f1);
