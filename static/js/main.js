@@ -3,22 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const themeToggle = document.querySelector('.theme-toggle');
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
     
-    // Comprobar preferencias del sistema
-    if (prefersDarkScheme.matches) {
-        document.body.classList.add('dark-mode');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    }
-    
-    // Alternar tema
-    themeToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
-        
-        if (document.body.classList.contains('dark-mode')) {
-            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        } else {
-            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        }
-    });
     
     // Menú móvil
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
