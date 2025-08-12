@@ -1,92 +1,51 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="project-detail-section">
-    <div class="section-spacer"></div>
-    <div class="container">
-        <!-- Botón de volver -->
-        <a href="{{ url_for('projects_page') }}" class="back-link">
-            <i class="fas fa-arrow-left"></i> Volver a proyectos
-        </a>
+<section class="wine-project-detail">
+  <div class="container">
+    <a href="{{ url_for('projects_page') }}" class="back-link">
+      <i class="fas fa-arrow-left"></i> Volver a proyectos
+    </a>
 
-        <!-- Encabezado con navegación -->
-        <div class="project-navigation">
-            <a href="{{ url_for('project_subpage', project_id=project.id, subpage='preprocesamiento') }}" 
-               class="nav-btn {% if active_subpage == 'preprocesamiento' %}active{% endif %}">
-                <i class="fas fa-cogs"></i> Preprocesamiento
-            </a>
-            <a href="{{ url_for('project_subpage', project_id=project.id, subpage='analisis') }}" 
-               class="nav-btn {% if active_subpage == 'analisis' %}active{% endif %}">
-                <i class="fas fa-chart-line"></i> Análisis
-            </a>
-            <a href="{{ url_for('project_subpage', project_id=project.id, subpage='ml') }}" 
-               class="nav-btn {% if active_subpage == 'ml' %}active{% endif %}">
-                <i class="fas fa-robot"></i> Machine Learning
-            </a>
-        </div>
-
-        <!-- Encabezado del proyecto -->
-        <div class="project-header">
-            <div class="project-meta">
-                <span class="project-category">{{ project.category }}</span>
-                <span class="project-date">{{ project.date }}</span>
-            </div>
-            <h1>{{ project.title }}</h1>
-            <p class="project-description">{{ project.description }}</p>
-            
-            <!-- Misma imagen que en la card -->
-            <div class="project-image-wrapper">
-                <img src="{{ url_for('static', filename='img/' + project.image) }}" 
-                     alt="{{ project.title }}" class="project-main-img">
-            </div>
-        </div>
-
-        <!-- Contenido principal -->
-        <div class="project-content">
-            <article class="project-article">
-                <h2 class="section-title">
-                    <span class="title-number">01.</span> Documentación General
-                    <span class="title-line"></span>
-                </h2>
-                <div class="article-content">
-                    {{ project.documentacion|safe }}
-                </div>
-            </article>
-
-            <!-- Tecnologías -->
-            <div class="project-tech">
-                <h2 class="section-title">
-                    <span class="title-number">02.</span> Tecnologías Utilizadas
-                    <span class="title-line"></span>
-                </h2>
-                <ul class="tech-list">
-                    {% for tech in project.technologies %}
-                    <li>
-                        <i class="{{ tech.icon }}"></i>
-                        <span>{{ tech.name }}</span>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-
-            <!-- Recursos (GitHub y Dataset) -->
-            <div class="project-resources">
-                <h2 class="section-title">
-                    <span class="title-number">03.</span> Recursos
-                    <span class="title-line"></span>
-                </h2>
-                <div class="resources-grid">
-                    <a href="{{ project.github_url }}" class="resource-card" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <span>Código fuente</span>
-                    </a>
-                    <a href="{{ project.dataset_url }}" class="resource-card" target="_blank">
-                        <i class="fas fa-database"></i>
-                        <span>Dataset utilizado</span>
-                    </a>
-                </div>
-            </div>
-        </div>
+    <div class="project-header">
+      <div class="wine-meta">
+        <span class="wine-category">{{ project.category }}</span>
+        <span class="wine-date">{{ project.date }}</span>
+      </div>
+      <h1 class="wine-title">{{ project.title }}</h1>
+      <p class="wine-description">{{ project.description }}</p>
+      
+      <div class="wine-hero-image">
+        <img src="{{ url_for('static', filename='img/' + project.image) }}" 
+             alt="{{ project.title }}" class="img-fluid">
+      </div>
     </div>
+
+    <div class="project-navigation wine-nav">
+      {% for section in ['preprocesamiento', 'analisis', 'ml'] %}
+      <a href="{{ url_for('project_subpage', project_id=project.id, subpage=section) }}" 
+         class="nav-btn {% if active_subpage == section %}active{% endif %}">
+        <i class="fas fa-{{ 'cogs' if section == 'preprocesamiento' else 'chart-line' if section == 'analisis' else 'robot' }}"></i>
+        {{ 'Preprocesamiento' if section == 'preprocesamiento' else 'Análisis' if section == 'analisis' else 'ML' }}
+      </a>
+      {% endfor %}
+    </div>
+
+    <article class="wine-documentation">
+      {{ project.content.documentacion|safe }}
+    </article>
+
+    <div class="wine-resources">
+      <h3><i class="fas fa-download"></i> Recursos del Proyecto</h3>
+      <div class="resource-buttons">
+        <a href="{{ project.resources.github }}" class="btn btn-outline-dark" target="_blank">
+          <i class="fab fa-github"></i> Código Fuente
+        </a>
+        <a href="{{ project.resources.dataset }}" class="btn btn-outline-dark" target="_blank">
+          <i class="fas fa-database"></i> Dataset Original
+        </a>
+      </div>
+    </div>
+  </div>
 </section>
 {% endblock %}

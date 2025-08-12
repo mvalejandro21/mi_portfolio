@@ -1,97 +1,64 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="project-subpage-section">
-    <div class="section-spacer"></div>
-    <div class="container">
-        <!-- Botón de volver -->
-        <a href="{{ url_for('project_detail', project_id=project.id) }}" class="back-link animate-on-scroll">
-            <i class="fas fa-arrow-left"></i> Volver al proyecto
-        </a>
-        
-        <!-- Encabezado -->
-        <div class="subpage-header animate-on-scroll" data-delay="0.1s">
-            <div class="subpage-breadcrumb">
-                <span>{{ project.title }}</span>
-                <i class="fas fa-chevron-right"></i>
-                <span class="current-page">{{ title }}</span>
-            </div>
-            <h1 class="subpage-title">
-                <span class="title-icon">
-                    {% if title == 'Preprocesamiento' %}
-                    <i class="fas fa-cogs"></i>
-                    {% elif title == 'Análisis' %}
-                    <i class="fas fa-chart-line"></i>
-                    {% else %}
-                    <i class="fas fa-robot"></i>
-                    {% endif %}
-                </span>
-                {{ title }}
-            </h1>
-        </div>
-        
-        <!-- Contenido principal -->
-        <div class="subpage-content-grid">
-            <!-- Texto/documentación -->
-            <article class="subpage-documentation animate-on-scroll" data-delay="0.2s">
-                <div class="documentation-content">
-                    {{ content|safe }}
-                </div>
-                
-                <!-- Acción específica según la sección -->
-                <div class="action-section">
-                    {% if subpage == 'ml' %}
-                    <a href="{{ project.demo_url }}" class="action-btn" target="_blank">
-                        <i class="fas fa-external-link-alt"></i>
-                        <span>Ver demo en vivo</span>
-                    </a>
-                    {% elif subpage == 'analisis' %}
-                    <a href="{{ project.dashboard_url }}" class="action-btn" download>
-                        <i class="fas fa-download"></i>
-                        <span>Descargar dashboard</span>
-                    </a>
-                    {% endif %}
-                </div>
-            </article>
-            
-            <!-- Imagen/visualización -->
-            <aside class="subpage-visualization animate-on-scroll" data-delay="0.3s">
-                <div class="visualization-container">
-                    {% if title == 'Preprocesamiento' %}
-                    <img src="{{ url_for('static', filename='img/data-processing.jpg') }}" 
-                         alt="Procesamiento de datos" class="visualization-image">
-                    {% elif title == 'Analisis' %}
-                    <img src="{{ url_for('static', filename='img/data-analysis.jpg') }}" 
-                         alt="Análisis de datos" class="visualization-image">
-                    {% else %}
-                    <img src="{{ url_for('static', filename='img/ml-model.jpg') }}" 
-                         alt="Modelo de Machine Learning" class="visualization-image">
-                    {% endif %}
-                    <div class="image-caption">
-                        Ilustración del proceso de {{ title|lower }}
-                    </div>
-                </div>
-            </aside>
-        </div>
-        
-        <!-- Navegación entre secciones -->
-        <nav class="subpage-navigation animate-on-scroll" data-delay="0.4s">
-            <a href="{{ url_for('project_subpage', project_id=project.id, subpage='preprocesamiento') }}" 
-               class="nav-btn {% if title == 'Preprocesamiento' %}active{% endif %}">
-                <i class="fas fa-cogs"></i>
-                <span>Preprocesamiento</span>
-            </a>
-            <a href="{{ url_for('project_subpage', project_id=project.id, subpage='analisis') }}" 
-               class="nav-btn {% if title == 'Análisis' %}active{% endif %}">
-                <i class="fas fa-chart-line"></i>
-                <span>Análisis</span>
-            </a>
-            <a href="{{ url_for('project_subpage', project_id=project.id, subpage='ml') }}" 
-               class="nav-btn {% if title == 'Machine Learning' %}active{% endif %}">
-                <i class="fas fa-robot"></i>
-                <span>Machine Learning</span>
-            </a>
-        </nav>
+<section class="wine-subpage">
+  <div class="container">
+    <a href="{{ url_for('project_detail', project_id=project.id) }}" class="back-link">
+      <i class="fas fa-arrow-left"></i> Volver al proyecto
+    </a>
+
+    <div class="subpage-header">
+      <h1>
+        <i class="fas fa-{{ 'cogs' if subpage == 'preprocesamiento' else 'chart-line' if subpage == 'analisis' else 'robot' }}"></i>
+        {{ 'Preprocesamiento' if subpage == 'preprocesamiento' else 'Análisis' if subpage == 'analisis' else 'Machine Learning' }}
+      </h1>
     </div>
+
+    <div class="row">
+      <div class="col-lg-8">
+        <article class="wine-content">
+          {{ project.content[subpage]|safe }}
+          
+          <!-- Insights como tarjetas -->
+          <div class="insights-grid">
+            {% for insight in project.insights[subpage] %}
+            <div class="insight-card">
+              <i class="fas fa-lightbulb"></i>
+              <p>{{ insight }}</p>
+            </div>
+            {% endfor %}
+          </div>
+        </article>
+      </div>
+      
+      <div class="col-lg-4">
+        <aside class="wine-visualization">
+          {% if subpage == 'preprocesamiento' %}
+          <img src="{{ url_for('static', filename='img/wine_cleaning.jpg') }}" 
+               alt="Procesamiento de datos de vinos" class="img-fluid">
+          {% elif subpage == 'analisis' %}
+          <img src="{{ url_for('static', filename='img/wine_analysis.jpg') }}" 
+               alt="Análisis de vinos" class="img-fluid">
+          {% else %}
+          <img src="{{ url_for('static', filename='img/wine_ml.jpg') }}" 
+               alt="Modelos de ML para vinos" class="img-fluid">
+          {% endif %}
+        </aside>
+        
+        <!-- Botón dinámico -->
+        <div class="action-button-container">
+          {% if subpage == 'analisis' %}
+          <a href="{{ project.resources.dashboard }}" class="btn btn-download" download>
+            <i class="fas fa-file-download"></i> Descargar Dashboard (.pbix)
+          </a>
+          {% elif subpage == 'ml' %}
+          <a href="{{ project.resources.demo }}" class="btn btn-demo" target="_blank">
+            <i class="fas fa-external-link-alt"></i> Ver Demo Interactiva
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 {% endblock %}

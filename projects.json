@@ -1,45 +1,34 @@
 [
     {
-        "id": 1,
-        "title": "Sistema de Recomendación",
-        "description": "Sistema de recomendación basado en filtrado colaborativo",
-        "image": "recommendation.jpg",
-        "github_url": "https://github.com/tuusuario/proyecto-recomendacion",
-        "dataset_url": "https://www.kaggle.com/dataset/recomendacion",
-        "demo_url": "https://demo-recomendacion.com",
-        "dashboard_url": "/downloads/dashboard-recomendacion.pbix",
-        "documentacion": "Este proyecto implementa un sistema de recomendación...",
-        "preprocesamiento": "Para el preprocesamiento de datos...",
-        "analisis": "El análisis exploratorio de datos...",
-        "ml": "Implementamos un modelo de factorización matricial..."
-    },
-    {
-        "id": 2,
-        "title": "Sistema de Recomendación",
-        "description": "Sistema de recomendación basado en filtrado colaborativo",
-        "image": "recommendation.jpg",
-        "github_url": "https://github.com/tuusuario/proyecto-recomendacion",
-        "dataset_url": "https://www.kaggle.com/dataset/recomendacion",
-        "demo_url": "https://demo-recomendacion.com",
-        "dashboard_url": "/downloads/dashboard-recomendacion.pbix",
-        "documentacion": "Este proyecto implementa un sistema de recomendación...",
-        "preprocesamiento": "Para el preprocesamiento de datos...",
-        "analisis": "El análisis exploratorio de datos...",
-        "ml": "Implementamos un modelo de factorización matricial..."
-    },
-    {
-        "id": 1,
-        "title": "Sistema de Recomendación",
-        "description": "Sistema de recomendación basado en filtrado colaborativo",
-        "image": "recommendation.jpg",
-        "github_url": "https://github.com/tuusuario/proyecto-recomendacion",
-        "dataset_url": "https://www.kaggle.com/dataset/recomendacion",
-        "demo_url": "https://demo-recomendacion.com",
-        "dashboard_url": "/downloads/dashboard-recomendacion.pbix",
-        "documentacion": "Este proyecto implementa un sistema de recomendación...",
-        "preprocesamiento": "Para el preprocesamiento de datos...",
-        "analisis": "El análisis exploratorio de datos...",
-        "ml": "Implementamos un modelo de factorización matricial..."
+        "id": 4,
+        "title": "Análisis de Mercado de Vinos Premium",
+        "category": "Data Science",
+        "date": "2023-11-15",
+        "image": "wine_analysis.jpg",
+        "description": "Sistema de recomendación y análisis de mercado para vinos de alta gama",
+        "technologies": [
+            {"name": "Python", "icon": "fab fa-python"},
+            {"name": "spaCy", "icon": "fas fa-language"},
+            {"name": "Power BI", "icon": "fas fa-chart-bar"},
+            {"name": "Streamlit", "icon": "fas fa-stream"}
+        ],
+        "resources": {
+            "github": "https://github.com/tuusuario/wine-analysis",
+            "dataset": "https://www.kaggle.com/datasets/wine-reviews",
+            "demo": "https://wine-sommelier-demo.streamlit.app",
+            "dashboard": "/downloads/wine_analysis_dashboard.pbix"
+        },
+        "content": {
+            "documentacion": "<h3>Contexto</h3><p>Cliente: Empresa importadora de vinos...</p>",
+            "preprocesamiento": "<h3>Proceso de Limpieza</h3><ol><li>Selección del Dataset...</li></ol>",
+            "analisis": "<h3>Preguntas Clave</h3><h4>Relación calidad/precio</h4>...",
+            "ml": "<h3>Proyecto 1: Sommelier Virtual</h3><p>Recomendador interactivo...</p>"
+        },
+        "insights": {
+            "preprocesamiento": ["Se eliminaron 12% de duplicados", "50 descriptores de sabor identificados"],
+            "analisis": ["Portugal tiene mejor relación calidad-precio", "Tempranillo es la variedad más infravalorada"],
+            "ml": ["89% de precisión en recomendaciones", "Modelo identifica vinos con 20% descuento sobre valor real"]
+        }
     }
 
 ]
