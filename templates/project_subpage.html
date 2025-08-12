@@ -2,10 +2,11 @@
 
 {% block content %}
 <section class="project-subpage-section">
+    <div class="section-spacer"></div>
     <div class="container">
         <!-- Botón de volver -->
         <a href="{{ url_for('project_detail', project_id=project.id) }}" class="back-link animate-on-scroll">
-            <i class="fas fa-arrow-left"></i> estaaa
+            <i class="fas fa-arrow-left"></i> Volver al proyecto
         </a>
         
         <!-- Encabezado -->
@@ -19,7 +20,7 @@
                 <span class="title-icon">
                     {% if title == 'Preprocesamiento' %}
                     <i class="fas fa-cogs"></i>
-                    {% elif title == 'Analisis' %}
+                    {% elif title == 'Análisis' %}
                     <i class="fas fa-chart-line"></i>
                     {% else %}
                     <i class="fas fa-robot"></i>
@@ -37,25 +38,19 @@
                     {{ content|safe }}
                 </div>
                 
-                <!-- Sección de recursos -->
-                <div class="resources-section">
-                    <h3 class="resources-title">
-                        <i class="fas fa-paperclip"></i> VIVA LA MALAKITA
-                    </h3>
-                    <div class="resources-grid">
-                        <a href="#" class="resource-card">
-                            <i class="far fa-file-pdf"></i>
-                            <span>Documentación técnica</span>
-                        </a>
-                        <a href="#" class="resource-card">
-                            <i class="fab fa-github"></i>
-                            <span>Código fuente</span>
-                        </a>
-                        <a href="#" class="resource-card">
-                            <i class="fas fa-database"></i>
-                            <span>Dataset utilizado</span>
-                        </a>
-                    </div>
+                <!-- Acción específica según la sección -->
+                <div class="action-section">
+                    {% if title == 'Machine Learning' %}
+                    <a href="{{ project.demo_url }}" class="action-btn" target="_blank">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>Ver demo en vivo</span>
+                    </a>
+                    {% elif title == 'Análisis' %}
+                    <a href="{{ project.dashboard_url }}" class="action-btn" download>
+                        <i class="fas fa-download"></i>
+                        <span>Descargar dashboard</span>
+                    </a>
+                    {% endif %}
                 </div>
             </article>
             
@@ -65,7 +60,7 @@
                     {% if title == 'Preprocesamiento' %}
                     <img src="{{ url_for('static', filename='img/data-processing.jpg') }}" 
                          alt="Procesamiento de datos" class="visualization-image">
-                    {% elif title == 'Analisis' %}
+                    {% elif title == 'Análisis' %}
                     <img src="{{ url_for('static', filename='img/data-analysis.jpg') }}" 
                          alt="Análisis de datos" class="visualization-image">
                     {% else %}
@@ -87,12 +82,12 @@
                 <span>Preprocesamiento</span>
             </a>
             <a href="{{ url_for('project_subpage', project_id=project.id, subpage='analisis') }}" 
-               class="nav-btn {% if title == 'Analisis' %}active{% endif %}">
+               class="nav-btn {% if title == 'Análisis' %}active{% endif %}">
                 <i class="fas fa-chart-line"></i>
                 <span>Análisis</span>
             </a>
             <a href="{{ url_for('project_subpage', project_id=project.id, subpage='ml') }}" 
-               class="nav-btn {% if title == 'Ml' %}active{% endif %}">
+               class="nav-btn {% if title == 'Machine Learning' %}active{% endif %}">
                 <i class="fas fa-robot"></i>
                 <span>Machine Learning</span>
             </a>

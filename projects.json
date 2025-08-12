@@ -4,30 +4,42 @@
         "title": "Sistema de Recomendación",
         "description": "Sistema de recomendación basado en filtrado colaborativo",
         "image": "recommendation.jpg",
-        "documentacion": "Este proyecto implementa un sistema de recomendación para productos de e-commerce utilizando técnicas avanzadas de machine learning...",
-        "preprocesamiento": "Para el preprocesamiento de datos, realizamos limpieza de valores nulos, normalización de características y codificación de variables categóricas...",
-        "analisis": "El análisis exploratorio de datos reveló patrones interesantes en el comportamiento de los usuarios, identificando correlaciones entre características demográficas y preferencias de productos...",
-        "ml": "Implementamos un modelo de factorización matricial con TensorFlow, logrando un RMSE de 0.85 en el conjunto de prueba..."
+        "github_url": "https://github.com/tuusuario/proyecto-recomendacion",
+        "dataset_url": "https://www.kaggle.com/dataset/recomendacion",
+        "demo_url": "https://demo-recomendacion.com",
+        "dashboard_url": "/downloads/dashboard-recomendacion.pbix",
+        "documentacion": "Este proyecto implementa un sistema de recomendación...",
+        "preprocesamiento": "Para el preprocesamiento de datos...",
+        "analisis": "El análisis exploratorio de datos...",
+        "ml": "Implementamos un modelo de factorización matricial..."
     },
     {
         "id": 2,
-        "title": "Detección de Fraudes",
-        "description": "Modelo predictivo para detección de transacciones fraudulentas",
-        "image": "fraud.jpg",
-        "documentacion": "Este proyecto desarrolla un sistema de detección de transacciones fraudulentas en tiempo real utilizando técnicas de aprendizaje automático...",
-        "preprocesamiento": "El preprocesamiento incluyó manejo de desbalance de clases mediante SMOTE, escalado de características y reducción de dimensionalidad con PCA...",
-        "analisis": "El análisis de patrones de fraude reveló que la mayoría de las transacciones fraudulentas ocurren en ciertos rangos horarios y con montos específicos...",
-        "ml": "Utilizamos un modelo de Gradient Boosting con XGBoost que alcanzó una precisión del 98.7% y un recall del 92.5%..."
+        "title": "Sistema de Recomendación",
+        "description": "Sistema de recomendación basado en filtrado colaborativo",
+        "image": "recommendation.jpg",
+        "github_url": "https://github.com/tuusuario/proyecto-recomendacion",
+        "dataset_url": "https://www.kaggle.com/dataset/recomendacion",
+        "demo_url": "https://demo-recomendacion.com",
+        "dashboard_url": "/downloads/dashboard-recomendacion.pbix",
+        "documentacion": "Este proyecto implementa un sistema de recomendación...",
+        "preprocesamiento": "Para el preprocesamiento de datos...",
+        "analisis": "El análisis exploratorio de datos...",
+        "ml": "Implementamos un modelo de factorización matricial..."
     },
     {
-        "id": 3,
-        "title": "Análisis de Sentimientos",
-        "description": "Clasificación de opiniones de clientes en redes sociales",
-        "image": "sentiment.jpg",
-        "documentacion": "Sistema de análisis de sentimientos que clasifica comentarios de clientes en positivos, negativos o neutrales...",
-        "preprocesamiento": "Preprocesamiento de texto incluyó tokenización, eliminación de stopwords, lematización y creación de embeddings con Word2Vec...",
-        "analisis": "El análisis mostró que los clientes mencionan con mayor frecuencia aspectos relacionados con la atención al cliente y tiempos de entrega...",
-        "ml": "Implementamos un modelo de redes neuronales convolucionales (CNN) para texto que logró una precisión del 89% en el conjunto de validación..."
+        "id": 1,
+        "title": "Sistema de Recomendación",
+        "description": "Sistema de recomendación basado en filtrado colaborativo",
+        "image": "recommendation.jpg",
+        "github_url": "https://github.com/tuusuario/proyecto-recomendacion",
+        "dataset_url": "https://www.kaggle.com/dataset/recomendacion",
+        "demo_url": "https://demo-recomendacion.com",
+        "dashboard_url": "/downloads/dashboard-recomendacion.pbix",
+        "documentacion": "Este proyecto implementa un sistema de recomendación...",
+        "preprocesamiento": "Para el preprocesamiento de datos...",
+        "analisis": "El análisis exploratorio de datos...",
+        "ml": "Implementamos un modelo de factorización matricial..."
     }
-   
+
 ]
