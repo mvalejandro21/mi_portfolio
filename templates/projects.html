@@ -1,19 +1,51 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="projects">
+<section class="projects-section">
     <div class="container">
-        <h1>Mis Proyectos</h1>
-        <p class="subtitle">Explora mis trabajos más recientes en desarrollo de software y machine learning</p>
+        <div class="section-header animate-on-scroll">
+            <h1 class="section-title">
+                <span class="title-number">04.</span> Proyectos
+                <span class="title-line"></span>
+            </h1>
+            <p class="section-subtitle">Explora mis trabajos en análisis de datos, visualización y desarrollo</p>
+        </div>
         
         <div class="projects-grid">
             {% for project in projects %}
-            <div class="project-card">
-                <img src="{{ url_for('static', filename='img/' + project.image) }}" alt="{{ project.title }}">
-                <div class="project-info">
-                    <h3>{{ project.title }}</h3>
-                    <p>{{ project.description }}</p>
-                    <a href="{{ url_for('project_detail', project_id=project.id) }}" class="btn small">Ver Detalles</a>
+            <div class="project-card animate-on-scroll" data-delay="{{ loop.index * 0.1 }}s">
+                <div class="card-image">
+                    <img src="{{ url_for('static', filename='img/' + project.image) }}" alt="{{ project.title }}" class="project-image">
+                    <div class="image-overlay"></div>
+                    <div class="tech-tags">
+                        {% for tag in project.tags.split(',') %}
+                        <span class="tech-tag">{{ tag.strip() }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <h3>{{ project.title }}</h3>
+                        <div class="external-links">
+                            {% if project.github_url %}
+                            <a href="{{ project.github_url }}" class="link-icon" aria-label="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            {% endif %}
+                            {% if project.live_url %}
+                            <a href="{{ project.live_url }}" class="link-icon" aria-label="Live Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <p class="project-description">{{ project.description }}</p>
+                    <div class="card-footer">
+                        <a href="{{ url_for('project_detail', project_id=project.id) }}" class="btn small outline">
+                            <span>Ver detalles</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
             {% endfor %}
