@@ -19,7 +19,7 @@ def init_database():
 # Llamar al inicio para que en Render la BD esté lista antes de la primera consulta
 init_database()
 
-@app.route("/projects")
+@app.route("/projects", endpoint="projects_page")
 def projects():
     all_projects = Project.query.all()
     return render_template("projects.html", projects=all_projects)
