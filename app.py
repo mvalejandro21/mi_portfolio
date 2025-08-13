@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, send_file, send_from_directory
 import os
-from flask_sqlalchemy import SQLAlchemy
-from src.static.models.projects import Project, db
+from static.models.projects import db, Project  # Import del modelo
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'default_secret_key')
@@ -12,31 +11,15 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
-    # Si quieres insertar datos iniciales, puedes hacerlo aquí:
-    if Project.query.count() == 0:
-        db.session.add(Project(
-            title="🍷 Wine Variety Analysis",
-            description="Análisis avanzado de vinos...",
-            image="wine_analysis.jpg",
-            github_url="https://github.com/tuusuario/wine-analysis",
-            dataset_url="https://www.kaggle.com/datasets/zynicide/wine-reviews",
-            category="Data Science",
-            tags="Python, Pandas, NLP, spaCy, Machine Learning, Streamlit",
-            long_description="Proyecto completo de análisis...",
-            documentation="Contenido HTML de documentación general",
-            has_preprocessing=True,
-            has_analysis=True,
-            has_ml=True,
-            preprocessing_content="Contenido HTML del preprocesamiento",
-            analysis_content="Contenido HTML del análisis",
-            ml_content="Contenido HTML del ML",
-            dashboard_path="wine_dashboard.pbix",
-            demo_url="https://tusuariowine.streamlit.app"
-        ))
-        db.session.commit()
+@app.route("/projects")
+def projects():
+    all_projects = Project.query.all()
+    return render_template("projects.html", projects=all_projects)
+
+@app.route("/projects/<int:project_id>")
+def project_detail(project_id):
+    project = Project.query.get_or_404(project_id)
+    return render_template("project_detail.html", project=project)
 
 @app.route('/favicon.ico')
 def favicon():
