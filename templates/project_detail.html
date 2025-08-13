@@ -3,7 +3,7 @@
 {% block content %}
 <section class="project-detail wine-project">
     <div class="container">
-        <!-- Breadcrumb navigation actualizado -->
+        <!-- Breadcrumb navigation -->
         <nav class="breadcrumb">
             <a href="{{ url_for('home') }}">Inicio</a>
             <i class="fas fa-chevron-right"></i>
@@ -61,9 +61,13 @@
                 <div class="detail-card">
                     <h3>🛠️ Tecnologías</h3>
                     <div class="tech-tags">
-                        {% for tag in project.tags.split(',') %}
-                        <span class="tech-tag">{{ tag.strip() }}</span>
-                        {% endfor %}
+                        {% if project.tags %}
+                            {% for tag in project.tags.split(',') %}
+                            <span class="tech-tag">{{ tag.strip() }}</span>
+                            {% endfor %}
+                        {% else %}
+                            <span class="tech-tag">No especificado</span>
+                        {% endif %}
                     </div>
                 </div>
                 
@@ -116,29 +120,20 @@
             <a href="{{ url_for('projects_page') }}" class="btn outline">
                 <i class="fas fa-arrow-left"></i> Volver a Proyectos
             </a>
-            
-            <div class="social-share">
-                <span>Compartir:</span>
-                <a href="https://twitter.com/share?url={{ request.url }}&text=Mira este proyecto: {{ project.title }}" 
-                   class="social-icon" target="_blank">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.url }}&title={{ project.title }}&summary={{ project.description }}" 
-                   class="social-icon" target="_blank">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-            </div>
         </div>
     </div>
 </section>
 
 <!-- Script para mostrar documentación completa -->
 <script>
-document.querySelector('.read-more').addEventListener('click', function(e) {
+document.querySelector('.read-more')?.addEventListener('click', function(e) {
     e.preventDefault();
-    document.getElementById('full-docs').style.display = 'block';
-    this.style.display = 'none';
-    window.location.hash = '#full-docs';
+    const fullDocs = document.getElementById('full-docs');
+    if (fullDocs) {
+        fullDocs.style.display = 'block';
+        this.style.display = 'none';
+        window.location.hash = '#full-docs';
+    }
 });
 </script>
 {% endblock %}

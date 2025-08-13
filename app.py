@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, send_file, send_from_directory
 import os
 import json
+from src.static.models.projects import Project
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'default_secret_key')
@@ -40,10 +41,39 @@ def projects_page():
 
 @app.route('/project/<int:project_id>')
 def project_detail(project_id):
-    project = next((p for p in projects if p['id'] == project_id), None)
+    # Si usas SQLAlchemy
+    project = Project.query.get_or_404(project_id)
+    
+    # Si usas el JSON (como en tu código original)
+    # project = next((p for p in projects if p['id'] == project_id), None)
+    
     if not project:
         return redirect(url_for('projects_page'))
-    return render_template('project_detail.html', project=project)
+    
+    # Convertir el objeto SQLAlchemy a dict si es necesario
+    project_dict = {
+        'id': project.id,
+        'title': project.title,
+        'description': project.description,
+        'image': project.image,
+        'github_url': project.github_url,
+        'live_url': project.live_url,
+        'tags': project.tags,
+        'category': project.category,
+        'long_description': project.long_description,
+        'documentation': project.documentation,
+        'dataset_url': project.dataset_url,
+        'has_preprocessing': project.has_preprocessing,
+        'has_analysis': project.has_analysis,
+        'has_ml': project.has_ml,
+        'preprocessing_content': project.preprocessing_content,
+        'analysis_content': project.analysis_content,
+        'ml_content': project.ml_content,
+        'dashboard_path': project.dashboard_path,
+        'demo_url': project.demo_url
+    }
+    
+    return render_template('project_detail.html', project=project_dict)
 
 @app.route('/project/<int:project_id>/<subpage>')
 def project_subpage(project_id, subpage):
