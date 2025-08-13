@@ -44,16 +44,6 @@ def download_cv():
     path = 'cv.pdf'
     return send_file(path, as_attachment=True)
 
-@app.route('/projects')
-def projects_page():
-    projects = Project.query.all()  # Ahora viene del modelo
-    return render_template('projects.html', projects=projects)
-
-# Página de detalle del proyecto
-@app.route('/projects/<int:project_id>')
-def project_detail(project_id):
-    project = Project.query.get_or_404(project_id)
-    return render_template('project_detail.html', project=project)
 
 # Subpáginas
 @app.route('/projects/<int:project_id>/preprocessing')
