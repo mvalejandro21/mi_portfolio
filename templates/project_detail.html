@@ -1,25 +1,372 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hello World</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background: #f5f5f5;
-        }
-        h1 {
-            font-size: 5rem;
-            font-family: Arial, Helvetica, sans-serif;
-            color: #222;
-        }
-    </style>
-</head>
-<body>
-    <h1>Hello World</h1>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+<section class="project-detail wine-project">
+    <div class="container">
+        <!-- Breadcrumb navigation -->
+        <nav class="breadcrumb">
+            <a href="{{ url_for('index') }}">Inicio</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="{{ url_for('projects') }}">Proyectos</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>{{ project.title }}</span>
+        </nav>
+
+        <!-- Project header -->
+        <div class="project-header">
+            <div class="header-content">
+                <h1>{{ project.title }}</h1>
+                <p class="project-subtitle">{{ project.subtitle }}</p>
+                
+                <div class="project-links">
+                    {% if project.github_url %}
+                    <a href="{{ project.github_url }}" class="btn outline" target="_blank">
+                        <i class="fab fa-github"></i> Código
+                    </a>
+                    {% endif %}
+                    {% if project.dataset_url %}
+                    <a href="{{ project.dataset_url }}" class="btn outline" target="_blank">
+                        <i class="fas fa-database"></i> Dataset
+                    </a>
+                    {% endif %}
+                    {% if project.demo_url %}
+                    <a href="{{ project.demo_url }}" class="btn primary" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Demo
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="header-image">
+                <img src="{{ url_for('static', filename='img/projects/' + project.featured_image) }}" 
+                     alt="{{ project.title }}" class="featured-image">
+            </div>
+        </div>
+
+        <!-- Project overview -->
+        <div class="project-overview">
+            <div class="overview-content">
+                <h2>📌 Resumen del Proyecto</h2>
+                <div class="overview-text">
+                    {{ project.long_description|safe }}
+                </div>
+            </div>
+            
+            <div class="overview-details">
+                <div class="detail-card">
+                    <h3>📅 Duración</h3>
+                    <p>{{ project.duration }}</p>
+                </div>
+                
+                <div class="detail-card">
+                    <h3>🛠️ Tecnologías</h3>
+                    <div class="tech-tags">
+                        {% for tag in project.tags.split(',') %}
+                        <span class="tech-tag">{{ tag.strip() }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="detail-card">
+                    <h3>📊 Entregables</h3>
+                    <ul class="deliverables">
+                        {% for item in project.deliverables.split(';') %}
+                        <li>{{ item.strip() }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project sections navigation -->
+        <div class="section-nav">
+            <h2>Explorar Proyecto</h2>
+            <div class="section-buttons">
+                {% if project.has_preprocessing %}
+                <a href="#preprocessing" class="btn outline">
+                    <i class="fas fa-cogs"></i> Preprocesamiento
+                </a>
+                {% endif %}
+                
+                {% if project.has_analysis %}
+                <a href="#analysis" class="btn outline">
+                    <i class="fas fa-chart-bar"></i> Análisis
+                </a>
+                {% endif %}
+                
+                {% if project.has_ml %}
+                <a href="#ml" class="btn outline">
+                    <i class="fas fa-brain"></i> Modelos
+                </a>
+                {% endif %}
+                
+                <a href="#results" class="btn outline">
+                    <i class="fas fa-trophy"></i> Resultados
+                </a>
+            </div>
+        </div>
+
+        <!-- Preprocessing Section -->
+        {% if project.has_preprocessing %}
+        <section id="preprocessing" class="project-section">
+            <h2 class="section-title">
+                <i class="fas fa-cogs"></i> Preprocesamiento de Datos
+            </h2>
+            
+            <div class="section-content">
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Limpieza Inicial</h3>
+                            <ul>
+                                <li>Eliminación de duplicados</li>
+                                <li>Tratamiento de valores nulos</li>
+                                <li>Estandarización de formatos</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Transformación de Variables</h3>
+                            <ul>
+                                <li>Codificación de categorías</li>
+                                <li>Normalización de valores numéricos</li>
+                                <li>Creación de nuevas características</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Preparación para Análisis</h3>
+                            <ul>
+                                <li>División de conjuntos de datos</li>
+                                <li>Balanceo de clases (si aplica)</li>
+                                <li>Documentación de cambios</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="code-sample">
+                    <h3>Fragmento de Código</h3>
+                    <pre><code class="language-python"># Ejemplo de limpieza de datos
+def clean_wine_data(df):
+    # Eliminar duplicados
+    df = df.drop_duplicates()
+    
+    # Imputar precios faltantes
+    median_prices = df.groupby(['variety', 'province'])['price'].transform('median')
+    df['price'] = df['price'].fillna(median_prices)
+    
+    # Eliminar filas con descripciones faltantes
+    df = df.dropna(subset=['description'])
+    
+    return df</code></pre>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Analysis Section -->
+        {% if project.has_analysis %}
+        <section id="analysis" class="project-section">
+            <h2 class="section-title">
+                <i class="fas fa-chart-bar"></i> Análisis Exploratorio
+            </h2>
+            
+            <div class="section-content">
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <h3>Distribución de Puntuaciones</h3>
+                        <img src="{{ url_for('static', filename='img/projects/wine_points_dist.png') }}" 
+                             alt="Distribución de puntuaciones">
+                        <p>La mayoría de vinos se concentran entre 85-90 puntos, con una distribución normal.</p>
+                    </div>
+                    
+                    <div class="insight-card">
+                        <h3>Precio vs Puntuación</h3>
+                        <img src="{{ url_for('static', filename='img/projects/wine_price_vs_points.png') }}" 
+                             alt="Precio vs puntuación">
+                        <p>Relación logarítmica entre precio y puntuación. Rendimientos decrecientes en calidad.</p>
+                    </div>
+                    
+                    <div class="insight-card">
+                        <h3>Top Variedades</h3>
+                        <img src="{{ url_for('static', filename='img/projects/wine_top_varieties.png') }}" 
+                             alt="Top variedades">
+                        <p>Pinot Noir y Chardonnay dominan en cantidad, pero no siempre en calidad promedio.</p>
+                    </div>
+                    
+                    <div class="insight-card">
+                        <h3>Valor por País</h3>
+                        <img src="{{ url_for('static', filename='img/projects/wine_value_by_country.png') }}" 
+                             alt="Valor por país">
+                        <p>Portugal y Argentina ofrecen mejor relación calidad-precio que la media.</p>
+                    </div>
+                </div>
+                
+                <div class="dashboard-section">
+                    <h3>Dashboard Interactivo</h3>
+                    <p>Explora todos los insights en nuestro dashboard de Power BI:</p>
+                    <a href="{{ url_for('download_dashboard', project_id=project.id) }}" class="btn primary">
+                        <i class="fas fa-download"></i> Descargar Dashboard
+                    </a>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- ML Models Section -->
+        {% if project.has_ml %}
+        <section id="ml" class="project-section">
+            <h2 class="section-title">
+                <i class="fas fa-brain"></i> Modelos de Machine Learning
+            </h2>
+            
+            <div class="section-content">
+                <div class="model-card">
+                    <div class="model-header">
+                        <h3>1. Recomendador por Perfil de Sabor</h3>
+                        <span class="model-type">Sistema de Recomendación</span>
+                    </div>
+                    
+                    <div class="model-content">
+                        <div class="model-description">
+                            <h4>Descripción</h4>
+                            <p>Sistema que recomienda vinos basado en preferencias sensoriales del usuario, usando similitud de coseno entre perfiles de sabor.</p>
+                            
+                            <h4>Métricas</h4>
+                            <div class="metrics">
+                                <div class="metric">
+                                    <span class="metric-value">0.87</span>
+                                    <span class="metric-name">Precisión</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-value">0.85</span>
+                                    <span class="metric-name">Recall</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-value">0.86</span>
+                                    <span class="metric-name">F1-Score</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="model-image">
+                            <img src="{{ url_for('static', filename='img/projects/wine_rec_system.png') }}" 
+                                 alt="Recomendador de vinos">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="model-card">
+                    <div class="model-header">
+                        <h3>2. Clasificador de Valor</h3>
+                        <span class="model-type">Clasificación</span>
+                    </div>
+                    
+                    <div class="model-content">
+                        <div class="model-description">
+                            <h4>Descripción</h4>
+                            <p>Modelo que identifica vinos infravalorados usando regresión lineal para predecir precios esperados y compararlos con los reales.</p>
+                            
+                            <h4>Métricas</h4>
+                            <div class="metrics">
+                                <div class="metric">
+                                    <span class="metric-value">0.78</span>
+                                    <span class="metric-name">R²</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-value">$3.20</span>
+                                    <span class="metric-name">MAE</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="model-image">
+                            <img src="{{ url_for('static', filename='img/projects/wine_value_model.png') }}" 
+                                 alt="Modelo de valor">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="demo-cta">
+                    <h3>¿Quieres probar los modelos?</h3>
+                    <a href="{{ project.demo_url }}" class="btn primary large" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Acceder a la Demo
+                    </a>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Results Section -->
+        <section id="results" class="project-section">
+            <h2 class="section-title">
+                <i class="fas fa-trophy"></i> Resultados y Conclusiones
+            </h2>
+            
+            <div class="section-content">
+                <div class="results-grid">
+                    <div class="result-card highlight">
+                        <h3>💎 Hallazgo Clave</h3>
+                        <p>Identificamos 42 bodegas emergentes con vinos de +90 puntos por debajo de $30, oportunidades para el portafolio.</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>📈 Impacto en Negocio</h3>
+                        <p>El modelo de valor permitió reducir un 18% el costo promedio del portafolio manteniendo calidad.</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>🤖 Automatización</h3>
+                        <p>Los sistemas de recomendación redujeron en 70% el tiempo de selección de vinos para clientes.</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>📊 Insights</h3>
+                        <p>Descubrimos que los descriptores "mineral" y "elegante" correlacionan con +3 puntos en promedio.</p>
+                    </div>
+                </div>
+                
+                <div class="lessons-learned">
+                    <h3>Lecciones Aprendidas</h3>
+                    <ul>
+                        <li>La calidad de los datos es crítica - invertir en limpieza siempre vale la pena</li>
+                        <li>Los modelos simples con buenos datos superan a modelos complejos con datos mediocres</li>
+                        <li>La interpretabilidad es tan importante como la precisión para adopción empresarial</li>
+                    </ul>
+                </div>
+                
+                <div class="next-steps">
+                    <h3>Próximos Pasos</h3>
+                    <ul>
+                        <li>Incorporar datos de ventas para mejorar recomendaciones</li>
+                        <li>Desarrollar API para integración con sistemas internos</li>
+                        <li>Implementar monitoreo continuo de desempeño de modelos</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project footer -->
+        <div class="project-footer">
+            <a href="{{ url_for('projects') }}" class="btn outline">
+                <i class="fas fa-arrow-left"></i> Volver a Proyectos
+            </a>
+            
+            <div class="social-share">
+                <span>Compartir:</span>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
