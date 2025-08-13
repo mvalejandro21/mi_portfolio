@@ -19,7 +19,7 @@ def init_database():
 # Llamar al inicio para que en Render la BD esté lista antes de la primera consulta
 init_database()
 
-@app.route("/projects", endpoint="projects_page")
+@app.route("/projects")
 def projects():
     all_projects = Project.query.all()
     return render_template("projects.html", projects=all_projects)
@@ -52,21 +52,7 @@ def download_cv():
     path = 'cv.pdf'
     return send_file(path, as_attachment=True)
 
-# Subpáginas
-@app.route('/projects/<int:project_id>/preprocessing')
-def project_preprocessing(project_id):
-    project = Project.query.get_or_404(project_id)
-    return render_template('project_section.html', project=project, section_title="Preprocesamiento", content=project.preprocessing_content)
 
-@app.route('/projects/<int:project_id>/analysis')
-def project_analysis(project_id):
-    project = Project.query.get_or_404(project_id)
-    return render_template('project_section.html', project=project, section_title="Análisis", content=project.analysis_content)
-
-@app.route('/projects/<int:project_id>/ml')
-def project_ml(project_id):
-    project = Project.query.get_or_404(project_id)
-    return render_template('project_section.html', project=project, section_title="Machine Learning", content=project.ml_content)
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
