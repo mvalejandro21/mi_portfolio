@@ -36,143 +36,134 @@
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
 }
-
-/* Estilos para el detalle del proyecto */
-.project-detail-section {
+/* Estilos específicos para project-detail */
+.project-detail {
     padding: 2rem 0;
-}
-
-.back-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.back-button:hover {
-    text-decoration: underline;
 }
 
 .project-header {
     display: flex;
-    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 3rem;
     align-items: center;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-    gap: 1rem;
 }
 
-.project-links {
+.header-content {
+    flex: 1;
+}
+
+.header-image {
+    flex: 1;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.featured-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.project-overview {
     display: flex;
-    gap: 1rem;
-}
-
-.project-intro, 
-.project-docs, 
-.project-sections {
+    gap: 2rem;
     margin-bottom: 3rem;
 }
 
-.project-sections h2 {
-    margin-bottom: 1.5rem;
+.overview-content {
+    flex: 2;
+}
+
+.overview-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.detail-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.documentation-preview {
+    position: relative;
+    max-height: 150px;
+    overflow: hidden;
+}
+
+.documentation-preview::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, white);
+}
+
+.read-more {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1;
+    background: var(--primary-color);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.section-nav {
+    margin: 3rem 0;
+    text-align: center;
 }
 
 .section-buttons {
     display: flex;
+    justify-content: center;
     gap: 1rem;
+    margin-top: 1.5rem;
     flex-wrap: wrap;
 }
 
-/* Estilos para las secciones específicas */
-.project-section-detail {
-    padding: 2rem 0;
-}
-
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-}
-
-.breadcrumb a {
-    color: var(--primary-color);
-    text-decoration: none;
-}
-
-.breadcrumb a:hover {
-    text-decoration: underline;
-}
-
-.section-content {
-    margin: 2rem 0;
-    line-height: 1.6;
-}
-
-.section-footer {
+.project-footer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .project-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .section-buttons, 
-    .project-links {
-        width: 100%;
-    }
-    
-    .section-buttons .btn,
-    .project-links .btn {
-        flex-grow: 1;
-        text-align: center;
-    }
-}
-
-/* Acciones de Tarjeta */
-.card-actions {
+.social-share {
     display: flex;
-    gap: 10px;
-    margin-top: 20px;
+    align-items: center;
+    gap: 1rem;
 }
 
-.card-actions .btn {
-    flex: 1;
-    text-align: center;
-    padding: 10px;
-    font-size: 0.9rem;
+.social-icon {
+    color: #666;
+    font-size: 1.2rem;
+}
+
+.social-icon:hover {
+    color: var(--primary-color);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .documentation-section {
-        padding: 20px;
-    }
-    
-    .docs-title {
-        font-size: 1.5rem;
-    }
-    
-    .action-buttons {
+    .project-header, .project-overview {
         flex-direction: column;
     }
     
-    .action-buttons .btn {
-        width: 100%;
-    }
-    
-    .card-actions {
-        flex-direction: column;
+    .header-image {
+        order: -1;
     }
 }
 /* Projects Section */
