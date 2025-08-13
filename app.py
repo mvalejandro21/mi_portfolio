@@ -1,23 +1,23 @@
 from flask import Flask, render_template, request, redirect, url_for, send_file, send_from_directory
 import os
-from static.models.projects import db, Project  # Import del modelo
+from static.models.projects import db, Project  # Import del modelo y DB
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'default_secret_key')
 
-# Configuración base de datos
+# Configuración de la base de datos
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///projects.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 db.init_app(app)
 
-@app.before_first_request
-def create_tables():
-    """
-    Crear las tablas si no existen.
-    No insertamos datos de ejemplo porque ya se cargarán desde models/projects.py
-    """
-    db.create_all()
+def init_database():
+    """Crea las tablas si no existen."""
+    with app.app_context():
+        db.create_all()
+        print("✅ Base de datos inicializada.")
+
+# Llamar al inicio para que en Render la BD esté lista antes de la primera consulta
+init_database()
 
 @app.route("/projects")
 def projects():
@@ -31,11 +31,8 @@ def project_detail(project_id):
 
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory(
-        os.path.join(app.root_path, 'static'),
-        'img/favicon.ico',
-        mimetype='image/vnd.microsoft.icon'
-    )
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                              'img/favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/')
 def home():
@@ -55,36 +52,21 @@ def download_cv():
     path = 'cv.pdf'
     return send_file(path, as_attachment=True)
 
-# Subpáginas de proyecto
+# Subpáginas
 @app.route('/projects/<int:project_id>/preprocessing')
 def project_preprocessing(project_id):
     project = Project.query.get_or_404(project_id)
-    return render_template(
-        'project_section.html',
-        project=project,
-        section_title="Preprocesamiento",
-        content=project.preprocessing_content
-    )
+    return render_template('project_section.html', project=project, section_title="Preprocesamiento", content=project.preprocessing_content)
 
 @app.route('/projects/<int:project_id>/analysis')
 def project_analysis(project_id):
     project = Project.query.get_or_404(project_id)
-    return render_template(
-        'project_section.html',
-        project=project,
-        section_title="Análisis",
-        content=project.analysis_content
-    )
+    return render_template('project_section.html', project=project, section_title="Análisis", content=project.analysis_content)
 
 @app.route('/projects/<int:project_id>/ml')
 def project_ml(project_id):
     project = Project.query.get_or_404(project_id)
-    return render_template(
-        'project_section.html',
-        project=project,
-        section_title="Machine Learning",
-        content=project.ml_content
-    )
+    return render_template('project_section.html', project=project, section_title="Machine Learning", content=project.ml_content)
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
@@ -93,7 +75,6 @@ def contact():
         email = request.form['email']
         subject = request.form.get('subject', '')
         message = request.form['message']
-        # Aquí podrías guardar en DB o enviar por email
         return redirect(url_for('contact_success'))
     return render_template('contact.html', success=False)
 
@@ -102,6 +83,5 @@ def contact_success():
     return render_template('contact.html', success=True)
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
+    init_database()
     app.run(debug=True)
