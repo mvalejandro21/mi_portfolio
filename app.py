@@ -14,21 +14,6 @@ def init_database():
     """Crea las tablas si no existen y añade datos iniciales."""
     with app.app_context():
         db.create_all()
-        
-        # Verificar si ya existen proyectos para no duplicar
-        if Project.query.count() == 0:
-            wine_project = Project(
-                title="🍷 Wine Variety Analysis",
-                description="Análisis avanzado de vinos para identificar oportunidades de mercado...",
-                image="wine_analysis.jpg",
-                github_url="https://github.com/tuusuario/wine-analysis",
-                # Añade aquí todos los campos necesarios
-            )
-            db.session.add(wine_project)
-            db.session.commit()
-            print("✅ Proyecto de ejemplo añadido a la base de datos.")
-        else:
-            print("✅ Base de datos ya contiene datos.")
 # Llamar al inicio para que en Render la BD esté lista antes de la primera consulta
 init_database()
 
