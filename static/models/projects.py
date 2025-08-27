@@ -40,7 +40,7 @@ class Project(db.Model):
 
 
 wine_project = Project(
-    title="🍷 Wine Variety Analysis",
+    title="🍷 Wine Variety ANAL ISIS",
     description="Análisis avanzado de vinos para identificar oportunidades de mercado y crear sistemas de recomendación",
     image="wine_analysis.jpg",
     github_url="https://github.com/tuusuario/wine-analysis",
@@ -199,3 +199,7 @@ wine_project = Project(
     dashboard_path="wine_dashboard.pbix",
     demo_url="https://tusuariowine.streamlit.app"
 )
+
+
+
+#asda
