@@ -11,20 +11,24 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 def init_database():
-    """Crea las tablas si no existen y añade datos iniciales."""
+    """Crea las tablas si no existen y añade proyectos iniciales"""
     with app.app_context():
         db.create_all()
+        # Inicializar los proyectos predefinidos
+        Project.initialize_projects(db.session)
+        print("Base de datos inicializada con proyectos")
+
 # Llamar al inicio para que en Render la BD esté lista antes de la primera consulta
 init_database()
 
 @app.route("/projects")
 def projects():
-    all_projects = Project.query.all()
+    all_projects = Project.get_all_projects()
     return render_template("projects.html", projects=all_projects)
 
 @app.route("/projects/<int:project_id>")
 def project_detail(project_id):
-    project = Project.query.get_or_404(project_id)
+    project = Project.get_project_by_id(project_id)
     return render_template("project_detail.html", project=project)
 
 @app.route('/favicon.ico')
@@ -49,8 +53,6 @@ def cv():
 def download_cv():
     path = 'cv.pdf'
     return send_file(path, as_attachment=True)
-
-
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
