@@ -1,242 +1,226 @@
 {% extends "base.html" %}
 {% block content %}
 <div style="margin-top: 80px; min-height: calc(100vh - 80px);">
-    <div class="project-detail-container">
-    <!-- Header con información principal -->
-    <header class="project-header">
-        <div class="container">
-            <a href="{{ url_for('home') }}" class="back-button">
-                <i class="fas fa-arrow-left"></i> Volver a Proyectos
-            </a>
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h1 class="project-title">{{ project.title }}</h1>
-                    <p class="project-description">{{ project.description }}</p>
-                    <div>
-                        <span class="badge-custom"><i class="fas fa-tag me-1"></i> {{ project.category }}</span>
-                        <span class="badge-custom"><i class="fas fa-calendar me-1"></i> {{ project.date_created.strftime('%B %Y') if project.date_created else 'Fecha no disponible' }}</span>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center">
-                    {% if project.image %}
-                    <img src="{{ url_for('static', filename='images/' + project.image) }}" alt="{{ project.title }}" class="project-image">
-                    {% else %}
-                    <div class="project-image bg-light d-flex align-items-center justify-content-center">
-                        <i class="fas fa-image fa-3x text-muted"></i>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <main class="container">
-        <!-- Botones de acción -->
-        <div class="project-actions">
-            {% if project.github_url %}
-            <a href="{{ project.github_url }}" class="btn-action btn-github" target="_blank">
-                <i class="fab fa-github"></i> Ver Código
-            </a>
-            {% endif %}
-            
-            {% if project.live_url %}
-            <a href="{{ project.live_url }}" class="btn-action btn-demo" target="_blank">
-                <i class="fas fa-external-link-alt"></i> Ver Demo
-            </a>
-            {% endif %}
-            
-            {% if project.dataset_url %}
-            <a href="{{ project.dataset_url }}" class="btn-action btn-dataset" target="_blank">
-                <i class="fas fa-database"></i> Dataset
-            </a>
-            {% endif %}
-        </div>
-
-        <!-- Tecnologías utilizadas -->
-        {% if project.tags %}
-        <div class="tech-section">
-            <h3 class="tech-title">Tecnologías utilizadas</h3>
-            <div>
-                {% for tag in project.tags.split(', ') %}
-                <span class="tech-badge">{{ tag }}</span>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-
-        <!-- Características del proyecto -->
-        <div class="features-grid">
-            {% if project.has_preprocessing %}
-            <div class="feature-item">
-                <div class="feature-icon"><i class="fas fa-cogs"></i></div>
-                <div class="feature-text">Preprocesamiento de datos</div>
-            </div>
-            {% endif %}
-            
-            {% if project.has_analysis %}
-            <div class="feature-item">
-                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
-                <div class="feature-text">Análisis exploratorio</div>
-            </div>
-            {% endif %}
-            
-            {% if project.has_ml %}
-            <div class="feature-item">
-                <div class="feature-icon"><i class="fas fa-brain"></i></div>
-                <div class="feature-text">Machine Learning</div>
-            </div>
-            {% endif %}
-            
-            {% if project.dashboard_path %}
-            <div class="feature-item">
-                <div class="feature-icon"><i class="fas fa-desktop"></i></div>
-                <div class="feature-text">Dashboard interactivo</div>
-            </div>
-            {% endif %}
-        </div>
-
-        <!-- Pestañas de contenido -->
-        <div class="tabs-container">
-            <ul class="nav nav-tabs" id="projectTabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">
-                        <i class="fas fa-file-alt me-2"></i>Descripción
-                    </button>
-                </li>
-                
-                {% if project.has_preprocessing %}
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="preprocessing-tab" data-bs-toggle="tab" data-bs-target="#preprocessing" type="button" role="tab" aria-controls="preprocessing" aria-selected="false">
-                        <i class="fas fa-cogs me-2"></i>Preprocesamiento
-                    </button>
-                </li>
-                {% endif %}
-                
-                {% if project.has_analysis %}
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="analysis-tab" data-bs-toggle="tab" data-bs-target="#analysis" type="button" role="tab" aria-controls="analysis" aria-selected="false">
-                        <i class="fas fa-chart-bar me-2"></i>Análisis
-                    </button>
-                </li>
-                {% endif %}
-                
-                {% if project.has_ml %}
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="ml-tab" data-bs-toggle="tab" data-bs-target="#ml" type="button" role="tab" aria-controls="ml" aria-selected="false">
-                        <i class="fas fa-robot me-2"></i>Machine Learning
-                    </button>
-                </li>
-                {% endif %}
-            </ul>
-
-            <div class="tab-content" id="projectTabsContent">
-                <!-- Descripción del proyecto -->
-                <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                    <div class="section-card fade-in">
-                        <h3 class="section-title"><i class="fas fa-info-circle"></i> Descripción General</h3>
-                        <div class="section-content">
-                            {% if project.long_description %}
-                            {{ project.long_description|safe }}
-                            {% else %}
-                            <p>No hay descripción detallada disponible para este proyecto.</p>
+    <div class="innovative-design">
+        <!-- Hero Section -->
+        <header class="project-hero">
+            <div class="container">
+                <a href="{{ url_for('home') }}" class="back-button-innovative">
+                    <i class="fas fa-arrow-left"></i> Volver a Proyectos
+                </a>
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <h1 class="hero-title">{{ project.title }}</h1>
+                        <p class="hero-description">{{ project.description }}</p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="badge bg-dark px-3 py-2 rounded-pill">
+                                <i class="fas fa-tag me-1"></i> {{ project.category }}
+                            </span>
+                            {% if project.date_created %}
+                            <span class="badge bg-secondary px-3 py-2 rounded-pill">
+                                <i class="fas fa-calendar me-1"></i> {{ project.date_created.strftime('%B %Y') }}
+                            </span>
                             {% endif %}
                         </div>
                     </div>
-
-                    {% if project.documentation %}
-                    <div class="section-card fade-in">
-                        <h3 class="section-title"><i class="fas fa-building"></i> Contexto</h3>
-                        <div class="section-content">
-                            {{ project.documentation|safe }}
-                        </div>
-                    </div>
-                    {% endif %}
-                </div>
-
-                <!-- Preprocesamiento -->
-                {% if project.has_preprocessing %}
-                <div class="tab-pane fade" id="preprocessing" role="tabpanel" aria-labelledby="preprocessing-tab">
-                    <div class="section-card fade-in">
-                        <div class="section-content">
-                            {% if project.preprocessing_content %}
-                            {{ project.preprocessing_content|safe }}
+                    <div class="col-lg-5 mt-4 mt-lg-0">
+                        <div class="hero-image-container">
+                            {% if project.image %}
+                            <img src="{{ url_for('static', filename='images/' + project.image) }}" 
+                                 alt="{{ project.title }}" class="hero-image">
                             {% else %}
-                            <p>No hay información de preprocesamiento disponible para este proyecto.</p>
+                            <div class="hero-image bg-light d-flex align-items-center justify-content-center">
+                                <i class="fas fa-image fa-3x text-muted"></i>
+                            </div>
                             {% endif %}
                         </div>
                     </div>
                 </div>
-                {% endif %}
+            </div>
+        </header>
 
-                <!-- Análisis -->
-                {% if project.has_analysis %}
-                <div class="tab-pane fade" id="analysis" role="tabpanel" aria-labelledby="analysis-tab">
-                    <div class="section-card fade-in">
-                        <div class="section-content">
-                            {% if project.analysis_content %}
-                            {{ project.analysis_content|safe }}
-                            {% else %}
-                            <p>No hay información de análisis disponible para este proyecto.</p>
-                            {% endif %}
-                        </div>
-                    </div>
+        <main class="container">
+            <!-- Sección de Documentación -->
+            <section class="action-section">
+                <div class="section-header">
+                    <h2 class="section-title">Documentación Técnica</h2>
+                    <p class="section-subtitle">Accede a la documentación completa de cada fase del proyecto</p>
                 </div>
-                {% endif %}
 
-                <!-- Machine Learning -->
-                {% if project.has_ml %}
-                <div class="tab-pane fade" id="ml" role="tabpanel" aria-labelledby="ml-tab">
-                    <div class="section-card fade-in">
-                        <div class="section-content">
-                            {% if project.ml_content %}
-                            {{ project.ml_content|safe }}
-                            {% else %}
-                            <p>No hay información de Machine Learning disponible para este proyecto.</p>
-                            {% endif %}
+                <div class="docs-grid">
+                    <!-- Preprocesamiento -->
+                    {% if project.has_preprocessing and project.preprocessing_url %}
+                    <div class="doc-card fade-in-up">
+                        <div class="doc-header">
+                            <div class="doc-icon preprocessing">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h3 class="doc-title">Preprocesamiento</h3>
                         </div>
-                        
-                        {% if project.demo_url %}
-                        <div class="demo-section">
-                            <h3 class="demo-title"><i class="fas fa-rocket"></i> Demo en Vivo</h3>
-                            <p>Puedes interactuar con el sistema:</p>
-                            <a href="{{ project.demo_url }}" class="demo-button" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Probar Demo
+                        <p class="doc-description">
+                            Limpieza, transformación y preparación de datos para el análisis. 
+                            Incluye ETL, tratamiento de valores nulos y feature engineering.
+                        </p>
+                        <div class="button-group">
+                            <a href="{{ project.preprocessing_url }}" class="primary-button preprocessing" target="_blank">
+                                <i class="fas fa-book-open"></i> Ver Documentación
                             </a>
+                            {% if project.dataset_url %}
+                            <a href="{{ project.dataset_url }}" class="secondary-button preprocessing" target="_blank">
+                                <i class="fas fa-download"></i> Dataset
+                            </a>
+                            {% endif %}
                         </div>
-                        {% endif %}
                     </div>
+                    {% endif %}
+
+                    <!-- Análisis -->
+                    {% if project.has_analysis and project.analysis_url %}
+                    <div class="doc-card fade-in-up">
+                        <div class="doc-header">
+                            <div class="doc-icon analysis">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h3 class="doc-title">Análisis Exploratorio</h3>
+                        </div>
+                        <p class="doc-description">
+                            Análisis estadístico, visualizaciones y descubrimiento de insights. 
+                            Incluye EDA, correlaciones y patrones identificados.
+                        </p>
+                        <div class="button-group">
+                            <a href="{{ project.analysis_url }}" class="primary-button analysis" target="_blank">
+                                <i class="fas fa-chart-line"></i> Ver Análisis
+                            </a>
+                            {% if project.dashboard_url %}
+                            <a href="{{ project.dashboard_url }}" class="secondary-button analysis" target="_blank">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Machine Learning -->
+                    {% if project.has_ml and project.ml_url %}
+                    <div class="doc-card fade-in-up">
+                        <div class="doc-header">
+                            <div class="doc-icon ml">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h3 class="doc-title">Machine Learning</h3>
+                        </div>
+                        <p class="doc-description">
+                            Modelado, entrenamiento y evaluación de algoritmos de ML. 
+                            Incluye selección de modelos, tuning y resultados.
+                        </p>
+                        <div class="button-group">
+                            <a href="{{ project.ml_url }}" class="primary-button ml" target="_blank">
+                                <i class="fas fa-robot"></i> Ver Modelos
+                            </a>
+                            {% if project.demo_url %}
+                            <a href="{{ project.demo_url }}" class="secondary-button ml" target="_blank">
+                                <i class="fas fa-rocket"></i> Demo Live
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
-            </div>
-        </div>
-    </main>
+            </section>
+
+            <!-- Recursos Adicionales -->
+            <section class="resources-section">
+                <div class="section-header">
+                    <h2 class="section-title">Recursos Adicionales</h2>
+                    <p class="section-subtitle">Accede a todos los recursos disponibles del proyecto</p>
+                </div>
+
+                <div class="resource-grid">
+                    <!-- Código Fuente -->
+                    {% if project.github_url %}
+                    <div class="resource-item fade-in-up">
+                        <div class="resource-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h4 class="resource-title">Código Fuente</h4>
+                        <p>Repositorio completo con el código del proyecto</p>
+                        <a href="{{ project.github_url }}" class="resource-button" target="_blank">
+                            <i class="fab fa-github"></i> Ver en GitHub
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    <!-- Demo Live -->
+                    {% if project.live_url %}
+                    <div class="resource-item fade-in-up">
+                        <div class="resource-icon">
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                        <h4 class="resource-title">Demo Live</h4>
+                        <p>Prueba la implementación funcional del proyecto</p>
+                        <a href="{{ project.live_url }}" class="resource-button" target="_blank">
+                            <i class="fas fa-play"></i> Ver Demo
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    <!-- Descargas -->
+                    {% if project.download_url %}
+                    <div class="resource-item fade-in-up">
+                        <div class="resource-icon">
+                            <i class="fas fa-file-download"></i>
+                        </div>
+                        <h4 class="resource-title">Descargas</h4>
+                        <p>Reportes, documentos y recursos descargables</p>
+                        <a href="{{ project.download_url }}" class="resource-button" target="_blank">
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+
+            <!-- Descripción del Proyecto -->
+            {% if project.long_description %}
+            <section class="description-section">
+                <div class="section-header">
+                    <h2 class="section-title">Sobre el Proyecto</h2>
+                    <p class="section-subtitle">Contexto y detalles generales del proyecto</p>
+                </div>
+                
+                <div class="description-content fade-in-up">
+                    {{ project.long_description }}
+                </div>
+            </section>
+            {% endif %}
+        </main>
+    </div>
 </div>
 
 <!-- Incluir Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- Incluir Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Incluir Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const triggerTabList = [].slice.call(document.querySelectorAll('#projectTabs button'));
-        triggerTabList.forEach(function(triggerEl) {
-            triggerEl.addEventListener('click', function(event) {
-                const tabPanes = document.querySelectorAll('.tab-pane');
-                tabPanes.forEach(pane => {
-                    pane.classList.remove('fade-in');
-                });
-                
-                setTimeout(function() {
-                    const activePane = document.querySelector(event.target.getAttribute('data-bs-target'));
-                    if (activePane) {
-                        activePane.classList.add('fade-in');
-                    }
-                }, 50);
+        // Efecto de aparición escalonada
+        const cards = document.querySelectorAll('.fade-in-up');
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.15}s`;
+        });
+        
+        // Efecto hover mejorado para botones
+        const buttons = document.querySelectorAll('.primary-button, .secondary-button');
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                button.style.transform = 'translateY(-4px)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'translateY(0)';
             });
         });
     });
 </script>
-
 {% endblock %}
