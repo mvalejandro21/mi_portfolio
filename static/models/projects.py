@@ -66,8 +66,8 @@ class Project(db.Model):
                 dataset_url="https://www.kaggle.com/datasets/zynicide/wine-reviews"
             ),
             cls(
-                title="📊 Sales Dashboard",
-                description="Dashboard interactivo para análisis de ventas",
+                title="📊 Air BnB Analysis Barcelona",
+                description="Analisis de precios y disponibilidad de alojamientos en Barcelona",
                 image="sales_dashboard.jpg",
                 github_url="https://github.com/tuusuario/sales-dashboard",
                 live_url="https://tusuario-sales.streamlit.app",
@@ -79,7 +79,7 @@ class Project(db.Model):
                 download_url="/downloads/sales-report.pdf"
             ),
             cls(
-                title="🔍 Customer Segmentation",
+                title="🔍 Churn de clientes de IBM",
                 description="Análisis de clusters para segmentación de clientes",
                 image="segmentation.jpg",
                 github_url="https://github.com/tuusuario/customer-segmentation",
