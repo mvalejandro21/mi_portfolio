@@ -64,7 +64,7 @@
 
                 <div class="docs-grid">
                     <!-- Preprocesamiento -->
-                    {% if project.has_preprocessing and project.preprocessing_url %}
+                    {% if project.has_preprocessing %}
                     <div class="doc-card fade-in-up">
                         <div class="doc-header">
                             <div class="doc-icon preprocessing">
@@ -81,18 +81,16 @@
                                 <i class="fas fa-book-open"></i>
                                 <span>Ver Documentación</span>
                             </a>
-                            {% if project.dataset_url %}
                             <a href="{{ project.dataset_url }}" class="secondary-button preprocessing" target="_blank">
                                 <i class="fas fa-database"></i>
                                 <span>Dataset</span>
                             </a>
-                            {% endif %}
                         </div>
                     </div>
                     {% endif %}
 
                     <!-- Análisis -->
-                    {% if project.has_analysis and project.analysis_url %}
+                    {% if project.has_analysis %}
                     <div class="doc-card fade-in-up">
                         <div class="doc-header">
                             <div class="doc-icon analysis">
@@ -109,18 +107,16 @@
                                 <i class="fas fa-chart-line"></i>
                                 <span>Ver Documentación</span>
                             </a>
-                            {% if project.dashboard_url %}
                             <a href="{{ project.dashboard_url }}" class="secondary-button analysis" target="_blank">
                                 <i class="fas fa-tachometer-alt"></i>
                                 <span>Ver Dashboard</span>
                             </a>
-                            {% endif %}
                         </div>
                     </div>
                     {% endif %}
 
                     <!-- Machine Learning -->
-                    {% if project.has_ml and project.ml_url %}
+                    {% if project.has_ml %}
                     <div class="doc-card fade-in-up">
                         <div class="doc-header">
                             <div class="doc-icon ml">
@@ -137,12 +133,10 @@
                                 <i class="fas fa-robot"></i>
                                 <span>Ver Documentación</span>
                             </a>
-                            {% if project.demo_url %}
                             <a href="{{ project.demo_url }}" class="secondary-button ml" target="_blank">
                                 <i class="fas fa-rocket"></i>
                                 <span>Ver Demo</span>
                             </a>
-                            {% endif %}
                         </div>
                     </div>
                     {% endif %}
