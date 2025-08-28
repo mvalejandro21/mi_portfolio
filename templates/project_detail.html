@@ -12,13 +12,13 @@
                     <div class="col-lg-7">
                         <h1 class="hero-title">{{ project.title }}</h1>
                         <p class="hero-description">{{ project.description }}</p>
-                        <div class="d-flex flex-wrap gap-2">
-                            <span class="badge bg-dark px-3 py-2 rounded-pill">
-                                <i class="fas fa-tag me-1"></i> {{ project.category }}
+                        <div class="hero-badges">
+                            <span class="hero-badge">
+                                <i class="fas fa-tag"></i> {{ project.category }}
                             </span>
                             {% if project.date_created %}
-                            <span class="badge bg-secondary px-3 py-2 rounded-pill">
-                                <i class="fas fa-calendar me-1"></i> {{ project.date_created.strftime('%B %Y') }}
+                            <span class="hero-badge">
+                                <i class="fas fa-calendar"></i> {{ project.date_created.strftime('%B %Y') }}
                             </span>
                             {% endif %}
                         </div>
@@ -40,7 +40,22 @@
         </header>
 
         <main class="container">
-            <!-- Sección de Documentación -->
+            <!-- Sección de Descripción -->
+            {% if project.long_description %}
+            <section class="description-top-section">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            <div class="description-content-top fade-in-up">
+                                {{ project.long_description }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+
+            <!-- Sección de Documentación Técnica -->
             <section class="action-section">
                 <div class="section-header">
                     <h2 class="section-title">Documentación Técnica</h2>
@@ -63,11 +78,13 @@
                         </p>
                         <div class="button-group">
                             <a href="{{ project.preprocessing_url }}" class="primary-button preprocessing" target="_blank">
-                                <i class="fas fa-book-open"></i> Ver Documentación
+                                <i class="fas fa-book-open"></i>
+                                <span>Ver Documentación</span>
                             </a>
                             {% if project.dataset_url %}
                             <a href="{{ project.dataset_url }}" class="secondary-button preprocessing" target="_blank">
-                                <i class="fas fa-download"></i> Dataset
+                                <i class="fas fa-database"></i>
+                                <span>Dataset</span>
                             </a>
                             {% endif %}
                         </div>
@@ -89,11 +106,13 @@
                         </p>
                         <div class="button-group">
                             <a href="{{ project.analysis_url }}" class="primary-button analysis" target="_blank">
-                                <i class="fas fa-chart-line"></i> Ver Análisis
+                                <i class="fas fa-chart-line"></i>
+                                <span>Ver Documentación</span>
                             </a>
                             {% if project.dashboard_url %}
                             <a href="{{ project.dashboard_url }}" class="secondary-button analysis" target="_blank">
-                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Ver Dashboard</span>
                             </a>
                             {% endif %}
                         </div>
@@ -115,11 +134,13 @@
                         </p>
                         <div class="button-group">
                             <a href="{{ project.ml_url }}" class="primary-button ml" target="_blank">
-                                <i class="fas fa-robot"></i> Ver Modelos
+                                <i class="fas fa-robot"></i>
+                                <span>Ver Documentación</span>
                             </a>
                             {% if project.demo_url %}
                             <a href="{{ project.demo_url }}" class="secondary-button ml" target="_blank">
-                                <i class="fas fa-rocket"></i> Demo Live
+                                <i class="fas fa-rocket"></i>
+                                <span>Ver Demo</span>
                             </a>
                             {% endif %}
                         </div>
@@ -151,7 +172,7 @@
                     {% endif %}
 
                     <!-- Demo Live -->
-                    {% if project.live_url %}
+                    {% if project.live_url and not project.has_ml %}
                     <div class="resource-item fade-in-up">
                         <div class="resource-icon">
                             <i class="fas fa-external-link-alt"></i>
@@ -179,20 +200,6 @@
                     {% endif %}
                 </div>
             </section>
-
-            <!-- Descripción del Proyecto -->
-            {% if project.long_description %}
-            <section class="description-section">
-                <div class="section-header">
-                    <h2 class="section-title">Sobre el Proyecto</h2>
-                    <p class="section-subtitle">Contexto y detalles generales del proyecto</p>
-                </div>
-                
-                <div class="description-content fade-in-up">
-                    {{ project.long_description }}
-                </div>
-            </section>
-            {% endif %}
         </main>
     </div>
 </div>

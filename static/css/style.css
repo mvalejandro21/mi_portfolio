@@ -55,6 +55,72 @@
     --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.08);
     --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
+/* Añadir estas reglas al final de tu CSS */
+
+/* Sección de Descripción */
+.description-top-section {
+    padding: 3rem 0;
+    background: linear-gradient(135deg, var(--gray-50) 0%, var(--primary-white) 100%);
+    border-radius: 20px;
+    margin: 2rem 0 4rem;
+}
+
+.description-content-top {
+    background: var(--primary-white);
+    border: 1px solid var(--gray-200);
+    border-radius: 18px;
+    padding: 2.5rem;
+    line-height: 1.7;
+    color: var(--gray-600);
+    font-size: 16px;
+    box-shadow: var(--shadow-soft);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.description-content-top p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.description-content-top p:last-child {
+    margin-bottom: 0;
+}
+
+/* Ajustes específicos para los botones */
+.primary-button span {
+    margin-left: 5px;
+}
+
+.secondary-button span {
+    margin-left: 5px;
+}
+
+/* Ajustar espaciado entre secciones */
+.action-section {
+    padding: 2rem 0 4rem;
+}
+
+/* Mejorar visualización de badges */
+.hero-badges {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.hero-badge {
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary-white);
+    border: 1px solid var(--gray-300);
+    box-shadow: var(--shadow-soft);
+}
 
 .innovative-design {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
