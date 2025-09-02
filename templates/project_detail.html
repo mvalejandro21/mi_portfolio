@@ -77,10 +77,12 @@
                             Incluye ETL, tratamiento de valores nulos y feature engineering.
                         </p>
                         <div class="button-group">
-                            <a href="{{ project.preprocessing_url }}" class="primary-button preprocessing" target="_blank">
+                            <a href="{{ url_for('project_documentation', project_id=project.id, section='preprocessing') }}" 
+                            class="primary-button preprocessing">
                                 <i class="fas fa-book-open"></i>
                                 <span>Ver Documentación</span>
                             </a>
+
                             <a href="{{ project.dataset_url }}" class="secondary-button preprocessing" target="_blank">
                                 <i class="fas fa-database"></i>
                                 <span>Dataset</span>
@@ -103,10 +105,12 @@
                             Incluye EDA, correlaciones y patrones identificados.
                         </p>
                         <div class="button-group">
-                            <a href="{{ project.analysis_url }}" class="primary-button analysis" target="_blank">
+                            <a href="{{ project.analysis_url }}" class="primary-button analysis" target="_blank"><a href="{{ url_for('project_documentation', project_id=project.id, section='analysis') }}" 
+                            class="primary-button analysis">
                                 <i class="fas fa-chart-line"></i>
                                 <span>Ver Documentación</span>
                             </a>
+
                             <a href="{{ project.dashboard_url }}" class="secondary-button analysis" target="_blank">
                                 <i class="fas fa-tachometer-alt"></i>
                                 <span>Ver Dashboard</span>
@@ -129,7 +133,8 @@
                             Incluye selección de modelos, tuning y resultados.
                         </p>
                         <div class="button-group">
-                            <a href="{{ project.ml_url }}" class="primary-button ml" target="_blank">
+                            <a href="{{ url_for('project_documentation', project_id=project.id, section='ml') }}" 
+                            class="primary-button ml">
                                 <i class="fas fa-robot"></i>
                                 <span>Ver Documentación</span>
                             </a>

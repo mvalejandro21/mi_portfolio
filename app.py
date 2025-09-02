@@ -68,6 +68,37 @@ def contact():
 def contact_success():
     return render_template('contact.html', success=True)
 
+@app.route("/projects/<int:project_id>/documentation/<section>")
+def project_documentation(project_id, section):
+    project = Project.get_project_by_id(project_id)
+    
+    # Determinar qué URL de documento usar según la sección
+    pdf_url = None
+    if section == "preprocessing" and project.has_preprocessing:
+        pdf_url = project.preprocessing_url
+    elif section == "analysis" and project.has_analysis:
+        pdf_url = project.analysis_url
+    elif section == "ml" and project.has_ml:
+        pdf_url = project.ml_url
+    
+    if not pdf_url:
+        # Redirigir a la página de proyecto si no hay documento
+        return redirect(url_for('project_detail', project_id=project_id))
+    
+    # Extraer el nombre del archivo de la URL
+    filename = pdf_url.split('/')[-1]
+    
+    return render_template('project_documentation.html', 
+                         project=project, 
+                         section=section,
+                         pdf_url=pdf_url,
+                         filename=filename)
+
+@app.route('/download-pdf/<path:filename>')
+def download_pdf(filename):
+    # Asumiendo que los PDFs están en la carpeta static/docs/
+    return send_from_directory('static/docs', filename, as_attachment=True)
+
 if __name__ == '__main__':
     init_database()
     app.run(debug=True)

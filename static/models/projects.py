@@ -53,8 +53,8 @@ class Project(db.Model):
                 category="Data Science",
                 tags="Python, Pandas, NLP, spaCy, Machine Learning, Streamlit",
                 long_description="""
-                Proyecto completo de análisis de vinos que incluye documentación detallada
-                en Notion sobre el proceso completo de data science.
+                Proyecto completo de análisis de vinos con enfoque en la identificación de oportunidades de mercado y la creación de sistemas de recomendación.
+                Así como enfocarnos en temas económicos y exploración de los mismos.
                 """,
                 preprocessing_url="https://your-notion.page.link/data-preprocessing",
                 analysis_url="https://your-notion.page.link/data-analysis", 
