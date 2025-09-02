@@ -2,120 +2,166 @@
 {% block content %}
 <div style="margin-top: 80px; min-height: calc(100vh - 80px);">
     <div class="innovative-design">
-        <!-- Header Section -->
-        <header class="documentation-hero">
+        <!-- Header Section mejorado -->
+        <header class="documentation-hero" style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); color: white; padding: 2.5rem 0; margin-bottom: 2rem;">
             <div class="container">
-                <div class="documentation-nav">
-                    <a href="{{ url_for('project_detail', project_id=project.id) }}" class="back-button-innovative">
+                <div class="documentation-nav" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <a href="{{ url_for('project_detail', project_id=project.id) }}" class="back-button-innovative" style="background: rgba(255, 255, 255, 0.2); color: white; padding: 0.6rem 1.2rem; border-radius: 50px; text-decoration: none; transition: all 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.3);">
                         <i class="fas fa-arrow-left"></i> Volver al Proyecto
                     </a>
                     <div class="documentation-actions">
-                        <a href="{{ url_for('download_pdf', filename=pdf_filename) }}" class="download-button">
+                        <a href="{{ url_for('download_pdf', filename=pdf_filename) }}" class="download-button" style="background: rgba(255, 255, 255, 0.2); color: white; padding: 0.6rem 1.2rem; border-radius: 50px; text-decoration: none; transition: all 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.3);">
                             <i class="fas fa-download"></i> Descargar PDF
                         </a>
                     </div>
                 </div>
                 
-                <div class="documentation-header-content">
-                    <h1 class="documentation-title">{{ project.title }}</h1>
-                    <p class="documentation-section">{{ section_name }}</p>
+                <div class="documentation-header-content" style="text-align: center;">
+                    <h1 class="documentation-title" style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">{{ project.title }}</h1>
+                    <p class="documentation-section" style="font-size: 1.2rem; opacity: 0.9;">{{ section_name }}</p>
                 </div>
             </div>
         </header>
 
-        <!-- PDF Viewer Section -->
+        <!-- PDF Viewer Section mejorado -->
         <main class="container">
-            <div class="pdf-viewer-container">
-                <div class="pdf-viewer">
-                    <iframe src="{{ url_for('view_pdf', filename=pdf_filename) }}#view=FitH" 
-                            width="100%" 
-                            height="600px" 
-                            frameborder="0"
-                            allowfullscreen>
-                    </iframe>
+            <div class="pdf-viewer-container" style="background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); overflow: hidden; margin-bottom: 2rem;">
+                <!-- Controles del PDF -->
+                <div class="pdf-controls" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: #f8f9fa; border-bottom: 1px solid #e9ecef;">
+                    <div class="pdf-info">
+                        <span style="font-weight: 500;">Visualizando: {{ pdf_filename }}</span>
+                    </div>
+                    <div class="pdf-actions">
+                        <a href="{{ url_for('download_pdf', filename=pdf_filename) }}" class="btn btn-sm btn-outline-primary">
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                    </div>
                 </div>
                 
-                <div class="pdf-alternative">
-                    <p>Si no puedes visualizar el documento, 
-                       <a href="{{ url_for('view_pdf', filename=pdf_filename) }}" target="_blank">ábrelo en una nueva pestaña</a> o 
-                       <a href="{{ url_for('download_pdf', filename=pdf_filename) }}">descárgalo</a>.
-                    </p>
+                <!-- Contenedor del PDF -->
+                <div class="pdf-viewer" style="width: 100%; height: 75vh; min-height: 600px; position: relative;">
+                    <iframe src="{{ url_for('view_pdf', filename=pdf_filename) }}#view=FitH&toolbar=0&navpanes=0" 
+                            width="100%" 
+                            height="100%" 
+                            frameborder="0"
+                            style="border: none;"
+                            allowfullscreen>
+                    </iframe>
+                    
+                    <!-- Overlay de carga -->
+                    <div class="pdf-loading" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem; margin-bottom: 1rem;"></div>
+                        <p>Cargando documento...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Información adicional -->
+            <div class="pdf-additional-info" style="background: #f8f9fa; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
+                <h5 style="margin-bottom: 1rem;">Información del documento</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Proyecto:</strong> {{ project.title }}</p>
+                        <p><strong>Sección:</strong> {{ section_name }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Archivo:</strong> {{ pdf_filename }}</p>
+                        <p><strong>Tamaño:</strong> <span id="file-size">Calculando...</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Acciones adicionales -->
+            <div class="pdf-alternative-actions" style="text-align: center; padding: 1.5rem; background: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);">
+                <p>Si experimentas problemas para visualizar el documento:</p>
+                <div class="action-buttons" style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem;">
+                    <a href="{{ url_for('view_pdf', filename=pdf_filename) }}" target="_blank" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i> Abrir en nueva pestaña
+                    </a>
+                    <a href="{{ url_for('download_pdf', filename=pdf_filename) }}" class="btn btn-outline-primary">
+                        <i class="fas fa-download"></i> Descargar copia
+                    </a>
                 </div>
             </div>
         </main>
     </div>
 </div>
 
-<!-- Estilos específicos para la página de documentación -->
+<!-- Script para mejorar la experiencia del PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+<script>
+// Configurar PDF.js
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.worker.min.js';
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Ocultar loading cuando el PDF esté listo
+    const iframe = document.querySelector('.pdf-viewer iframe');
+    const loadingOverlay = document.querySelector('.pdf-loading');
+    
+    if (iframe) {
+        iframe.addEventListener('load', function() {
+            setTimeout(function() {
+                if (loadingOverlay) {
+                    loadingOverlay.style.opacity = '0';
+                    setTimeout(function() {
+                        loadingOverlay.style.display = 'none';
+                    }, 500);
+                }
+            }, 1500);
+        });
+    }
+    
+    // Obtener información del PDF
+    fetch('{{ url_for("view_pdf", filename=pdf_filename) }}')
+        .then(response => {
+            const size = response.headers.get('content-length');
+            if (size) {
+                const sizeInMB = (size / (1024 * 1024)).toFixed(2);
+                const fileSizeElement = document.getElementById('file-size');
+                if (fileSizeElement) {
+                    fileSizeElement.textContent = sizeInMB + ' MB';
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error obteniendo información del PDF:', error);
+        });
+    
+    // Añadir efecto de carga suave
+    const containers = document.querySelectorAll('.pdf-viewer-container, .pdf-additional-info');
+    containers.forEach((container, index) => {
+        container.style.opacity = '0';
+        container.style.transform = 'translateY(20px)';
+        container.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        
+        setTimeout(function() {
+            container.style.opacity = '1';
+            container.style.transform = 'translateY(0)';
+        }, 100 + (index * 100));
+    });
+});
+</script>
+
+<!-- Estilos adicionales -->
 <style>
-.documentation-hero {
-    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-    color: white;
-    padding: 2rem 0;
-    margin-bottom: 2rem;
-}
-
-.documentation-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-.download-button {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
+.back-button-innovative:hover,
 .download-button:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.3) !important;
     transform: translateY(-2px);
 }
 
-.documentation-header-content {
-    text-align: center;
-}
-
-.documentation-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.documentation-section {
-    font-size: 1.2rem;
-    opacity: 0.9;
-}
-
 .pdf-viewer-container {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    margin-bottom: 2rem;
+    transition: all 0.3s ease;
 }
 
-.pdf-viewer {
-    width: 100%;
-    min-height: 600px;
+.pdf-viewer-container:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
 }
 
-.pdf-viewer iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-.pdf-alternative {
-    padding: 1.5rem;
-    text-align: center;
-    background: #f8f9fa;
-    border-top: 1px solid #e9ecef;
+.btn {
+    transition: all 0.3s ease;
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem;
 }
 
 @media (max-width: 768px) {
@@ -125,12 +171,18 @@
     }
     
     .documentation-title {
-        font-size: 2rem;
+        font-size: 2rem !important;
     }
     
     .pdf-viewer {
-        min-height: 400px;
+        min-height: 400px !important;
+        height: 50vh !important;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
     }
 }
 </style>
+
 {% endblock %}
