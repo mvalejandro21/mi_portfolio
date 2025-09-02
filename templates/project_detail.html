@@ -111,7 +111,7 @@
                                 <span>Ver Documentación</span>
                             </a>
 
-                            <a href="{{ project.dashboard_url }}" class="secondary-button analysis" target="_blank">
+                            <a href="{{ url_for('project_dashboard', project_id=project.id) }}" class="primary-button">
                                 <i class="fas fa-tachometer-alt"></i>
                                 <span>Ver Dashboard</span>
                             </a>

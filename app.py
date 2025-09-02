@@ -130,6 +130,11 @@ def download_pdf(filename):
         
     return send_file(pdf_path, as_attachment=True)
 
+@app.route('/project/<int:project_id>/dashboard')
+def project_dashboard(project_id):
+    project = Project.get_project_by_id(project_id)
+    return render_template('dashboard.html', project=project)
+
 if __name__ == '__main__':
     init_database()
     app.run(debug=True)

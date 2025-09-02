@@ -77,7 +77,7 @@ class Project(db.Model):
                 has_analysis=True,
                 has_preprocessing=True,
                 preprocessing_pdf="preprocesamiento_airbnb.pdf",
-                dashboard_url="https://tusuario-sales.streamlit.app",
+                dashboard_url="https://app.powerbi.com/reportEmbed?reportId=8c4b8471-6e14-47cc-bb48-71063bf202de&autoAuth=true&ctid=8aebddb6-3418-43a1-a255-b964186ecc64",
                 download_url="/downloads/sales-report.pdf",
                 dataset_url="https://insideairbnb.com/get-the-data"
             ),
