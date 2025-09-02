@@ -87,14 +87,14 @@ def project_documentation(project_id, section):
     pdf_filename = None
     section_name = ""
     
-    if section == "preprocessing" and project.has_preprocessing:
-        pdf_filename = "wine-preprocessing.pdf"  # Cambia por el nombre real de tu archivo
+    if section == "preprocessing" and project.has_preprocessing and project.preprocessing_pdf:
+        pdf_filename = project.preprocessing_pdf
         section_name = "Preprocesamiento de Datos"
-    elif section == "analysis" and project.has_analysis:
-        pdf_filename = "wine-analysis.pdf"  # Cambia por el nombre real de tu archivo
+    elif section == "analysis" and project.has_analysis and project.analysis_pdf:
+        pdf_filename = project.analysis_pdf
         section_name = "Análisis Exploratorio"
-    elif section == "ml" and project.has_ml:
-        pdf_filename = "wine-ml.pdf"  # Cambia por el nombre real de tu archivo
+    elif section == "ml" and project.has_ml and project.ml_pdf:
+        pdf_filename = project.ml_pdf
         section_name = "Machine Learning"
     
     if not pdf_filename:
@@ -102,9 +102,9 @@ def project_documentation(project_id, section):
         return redirect(url_for('project_detail', project_id=project_id))
     
     # Verificar si el archivo existe
-    pdf_path = os.path.join('static', 'docs', pdf_filename)
+    pdf_path = os.path.join('static', 'docs', 'pdf', pdf_filename)
     if not os.path.exists(pdf_path):
-        return f"Archivo {pdf_filename} no encontrado en la carpeta static/docs/", 404
+        return f"Archivo {pdf_filename} no encontrado en la carpeta static/docs/pdf/", 404
     
     return render_template('project_documentation.html', 
                          project=project, 
@@ -114,21 +114,21 @@ def project_documentation(project_id, section):
 
 @app.route('/view-pdf/<filename>')
 def view_pdf(filename):
-    # Ruta segura para evitar path traversal attacks
-    safe_path = os.path.join('static', 'docs', filename)
-    if not os.path.exists(safe_path):
-        return f"PDF {filename} no encontrado", 404
+    # Ruta a la carpeta de PDFs
+    pdf_path = os.path.join('static', 'docs', 'pdf', filename)
+    if not os.path.exists(pdf_path):
+        return f"PDF {filename} no encontrado en static/docs/pdf/", 404
         
-    return send_file(safe_path, mimetype='application/pdf')
+    return send_file(pdf_path, mimetype='application/pdf')
 
 @app.route('/download-pdf/<filename>')
 def download_pdf(filename):
-    # Ruta segura para evitar path traversal attacks
-    safe_path = os.path.join('static', 'docs', filename)
-    if not os.path.exists(safe_path):
-        return f"PDF {filename} no encontrado", 404
+    # Ruta a la carpeta de PDFs
+    pdf_path = os.path.join('static', 'docs', 'pdf', filename)
+    if not os.path.exists(pdf_path):
+        return f"PDF {filename} no encontrado en static/docs/pdf/", 404
         
-    return send_file(safe_path, as_attachment=True)
+    return send_file(pdf_path, as_attachment=True)
 
 if __name__ == '__main__':
     init_database()

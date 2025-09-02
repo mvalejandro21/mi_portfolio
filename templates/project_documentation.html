@@ -27,7 +27,7 @@
         <main class="container">
             <div class="pdf-viewer-container">
                 <div class="pdf-viewer">
-                    <iframe src="{{ url_for('view_pdf', filename=pdf_filename) }}" 
+                    <iframe src="{{ url_for('view_pdf', filename=pdf_filename) }}#view=FitH" 
                             width="100%" 
                             height="600px" 
                             frameborder="0"
@@ -103,6 +103,12 @@
 .pdf-viewer {
     width: 100%;
     min-height: 600px;
+}
+
+.pdf-viewer iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
 .pdf-alternative {
