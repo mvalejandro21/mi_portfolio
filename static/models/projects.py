@@ -16,9 +16,9 @@ class Project(db.Model):
     long_description = db.Column(db.Text)
     
     # Enlaces a documentación en Notion
-    preprocessing_url = db.Column(db.String(500))
-    analysis_url = db.Column(db.String(500))
-    ml_url = db.Column(db.String(500))
+    preprocessing_pdf = db.Column(db.String(500))
+    analysis_pdf = db.Column(db.String(500))
+    ml_pdf = db.Column(db.String(500))
     
     # Flags para secciones
     has_preprocessing = db.Column(db.Boolean, default=False)
@@ -56,9 +56,9 @@ class Project(db.Model):
                 Proyecto completo de análisis de vinos con enfoque en la identificación de oportunidades de mercado y la creación de sistemas de recomendación.
                 Así como enfocarnos en temas económicos y exploración de los mismos.
                 """,
-                preprocessing_url="https://your-notion.page.link/data-preprocessing",
-                analysis_url="https://your-notion.page.link/data-analysis", 
-                ml_url="https://your-notion.page.link/machine-learning",
+                preprocessing_pdf="https://your-notion.page.link/data-preprocessing",
+                analysis_pdf="https://your-notion.page.link/data-analysis", 
+                ml_pdf="https://your-notion.page.link/machine-learning",
                 has_preprocessing=True,
                 has_analysis=True,
                 has_ml=True,
@@ -73,8 +73,10 @@ class Project(db.Model):
                 live_url="https://tusuario-sales.streamlit.app",
                 category="Data Visualization",
                 tags="Python, Streamlit, Plotly, Pandas",
-                analysis_url="https://your-notion.page.link/sales-analysis",
+                analysis_pdf="preprocesamiento_airbnb.pdf",
                 has_analysis=True,
+                has_preprocessing=True,
+                preprocessing_pdf="preprocesamiento_airbnb.pdf",
                 dashboard_url="https://tusuario-sales.streamlit.app",
                 download_url="/downloads/sales-report.pdf"
             ),
@@ -84,9 +86,9 @@ class Project(db.Model):
                 image="segmentation.jpg",
                 github_url="https://github.com/tuusuario/customer-segmentation",
                 category="Data Analysis",
-                tags="Python, Scikit-learn, Clustering, Visualization",
-                preprocessing_url="https://your-notion.page.link/customer-preprocessing",
-                analysis_url="https://your-notion.page.link/customer-analysis",
+                tags="Python, Scikit-learn, Clustering, Visualización",
+                preprocessing_pdf="https://your-notion.page.link/customer-preprocessing",
+                analysis_pdf="https://your-notion.page.link/customer-analysis",
                 has_preprocessing=True,
                 has_analysis=True,
                 download_url="/downloads/segmentation-report.pdf"

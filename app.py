@@ -10,6 +10,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///projects.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
+with app.app_context():
+    db.drop_all()  # Elimina todas las tablas (¡cuidado en producción!)
+    db.create_all() 
+
 def init_database():
     """Crea las tablas si no existen y añade proyectos iniciales"""
     with app.app_context():
@@ -72,32 +76,47 @@ def contact_success():
 def project_documentation(project_id, section):
     project = Project.get_project_by_id(project_id)
     
-    # Determinar qué URL de documento usar según la sección
-    pdf_url = None
-    if section == "preprocessing" and project.has_preprocessing:
-        pdf_url = project.preprocessing_url
-    elif section == "analysis" and project.has_analysis:
-        pdf_url = project.analysis_url
-    elif section == "ml" and project.has_ml:
-        pdf_url = project.ml_url
+    # Determinar qué PDF mostrar según la sección
+    pdf_filename = None
+    section_name = ""
     
-    if not pdf_url:
+    if section == "preprocessing" and project.has_preprocessing and project.preprocessing_pdf:
+        pdf_filename = project.preprocessing_pdf
+        section_name = "Preprocesamiento de Datos"
+    elif section == "analysis" and project.has_analysis and project.analysis_pdf:
+        pdf_filename = project.analysis_pdf
+        section_name = "Análisis Exploratorio"
+    elif section == "ml" and project.has_ml and project.ml_pdf:
+        pdf_filename = project.ml_pdf
+        section_name = "Machine Learning"
+    
+    if not pdf_filename:
         # Redirigir a la página de proyecto si no hay documento
         return redirect(url_for('project_detail', project_id=project_id))
-    
-    # Extraer el nombre del archivo de la URL
-    filename = pdf_url.split('/')[-1]
     
     return render_template('project_documentation.html', 
                          project=project, 
                          section=section,
-                         pdf_url=pdf_url,
-                         filename=filename)
+                         section_name=section_name,
+                         pdf_filename=pdf_filename)
 
-@app.route('/download-pdf/<path:filename>')
+@app.route('/view-pdf/<filename>')
+def view_pdf(filename):
+    # Ruta segura para evitar path traversal attacks
+    safe_path = os.path.join('static', 'docs', filename)
+    if not os.path.exists(safe_path):
+        return "PDF no encontrado", 404
+        
+    return send_file(safe_path, mimetype='application/pdf')
+
+@app.route('/download-pdf/<filename>')
 def download_pdf(filename):
-    # Asumiendo que los PDFs están en la carpeta static/docs/
-    return send_from_directory('static/docs', filename, as_attachment=True)
+    # Ruta segura para evitar path traversal attacks
+    safe_path = os.path.join('static', 'docs', filename)
+    if not os.path.exists(safe_path):
+        return "PDF no encontrado", 404
+        
+    return send_file(safe_path, as_attachment=True)
 
 if __name__ == '__main__':
     init_database()
