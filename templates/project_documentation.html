@@ -2,7 +2,7 @@
 {% block content %}
 <div style="margin-top: 80px; min-height: calc(100vh - 80px);">
     <div class="innovative-design">
-        <!-- Header Section mejorado -->
+        <!-- Header Section -->
         <header class="documentation-hero" style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); color: white; padding: 2.5rem 0; margin-bottom: 2rem;">
             <div class="container">
                 <div class="documentation-nav" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
@@ -23,7 +23,7 @@
             </div>
         </header>
 
-        <!-- PDF Viewer Section mejorado -->
+        <!-- PDF Viewer Section -->
         <main class="container">
             <div class="pdf-viewer-container" style="background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); overflow: hidden; margin-bottom: 2rem;">
                 <!-- Controles del PDF -->
@@ -40,16 +40,17 @@
                 
                 <!-- Contenedor del PDF -->
                 <div class="pdf-viewer" style="width: 100%; height: 75vh; min-height: 600px; position: relative;">
-                    <iframe src="{{ url_for('view_pdf', filename=pdf_filename) }}#view=FitH&toolbar=0&navpanes=0" 
+                    <iframe id="pdf-iframe" src="{{ url_for('view_pdf', filename=pdf_filename) }}#view=FitH&toolbar=1&navpanes=1" 
                             width="100%" 
                             height="100%" 
                             frameborder="0"
                             style="border: none;"
-                            allowfullscreen>
+                            allowfullscreen
+                            onload="hideLoading()">
                     </iframe>
                     
                     <!-- Overlay de carga -->
-                    <div class="pdf-loading" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                    <div id="pdf-loading" class="pdf-loading" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); display: flex; justify-content: center; align-items: center; flex-direction: column;">
                         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem; margin-bottom: 1rem;"></div>
                         <p>Cargando documento...</p>
                     </div>
@@ -87,59 +88,70 @@
     </div>
 </div>
 
-<!-- Script para mejorar la experiencia del PDF -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+<!-- Script simplificado para manejar la carga del PDF -->
 <script>
-// Configurar PDF.js
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.worker.min.js';
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Ocultar loading cuando el PDF esté listo
-    const iframe = document.querySelector('.pdf-viewer iframe');
-    const loadingOverlay = document.querySelector('.pdf-loading');
-    
-    if (iframe) {
-        iframe.addEventListener('load', function() {
+// Función para ocultar el overlay de carga
+function hideLoading() {
+    const loadingOverlay = document.getElementById('pdf-loading');
+    if (loadingOverlay) {
+        // Esperar un poco para asegurar que el PDF está cargado
+        setTimeout(function() {
+            loadingOverlay.style.opacity = '0';
             setTimeout(function() {
-                if (loadingOverlay) {
-                    loadingOverlay.style.opacity = '0';
-                    setTimeout(function() {
-                        loadingOverlay.style.display = 'none';
-                    }, 500);
-                }
-            }, 1500);
-        });
+                loadingOverlay.style.display = 'none';
+            }, 500);
+        }, 1000);
     }
-    
-    // Obtener información del PDF
+}
+
+// Obtener el tamaño del archivo
+function getFileSize() {
     fetch('{{ url_for("view_pdf", filename=pdf_filename) }}')
         .then(response => {
             const size = response.headers.get('content-length');
             if (size) {
                 const sizeInMB = (size / (1024 * 1024)).toFixed(2);
-                const fileSizeElement = document.getElementById('file-size');
-                if (fileSizeElement) {
-                    fileSizeElement.textContent = sizeInMB + ' MB';
-                }
+                document.getElementById('file-size').textContent = sizeInMB + ' MB';
+            } else {
+                document.getElementById('file-size').textContent = 'No disponible';
             }
         })
         .catch(error => {
-            console.error('Error obteniendo información del PDF:', error);
+            document.getElementById('file-size').textContent = 'No disponible';
         });
+}
+
+// Inicializar cuando el documento esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtener información del archivo
+    getFileSize();
     
-    // Añadir efecto de carga suave
-    const containers = document.querySelectorAll('.pdf-viewer-container, .pdf-additional-info');
-    containers.forEach((container, index) => {
-        container.style.opacity = '0';
-        container.style.transform = 'translateY(20px)';
-        container.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        
-        setTimeout(function() {
-            container.style.opacity = '1';
-            container.style.transform = 'translateY(0)';
-        }, 100 + (index * 100));
+    // Configurar timeout de seguridad para ocultar el loading
+    setTimeout(function() {
+        hideLoading();
+    }, 5000); // Ocultar después de 5 segundos como máximo
+    
+    // Efectos hover para botones
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+            button.style.transform = 'translateY(-2px)';
+            button.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+        });
+        button.addEventListener('mouseleave', () => {
+            button.style.transform = 'translateY(0)';
+            button.style.boxShadow = 'none';
+        });
     });
 });
+
+// Función para forzar la ocultación del loading (puedes llamarla desde la consola si es necesario)
+window.forceHideLoading = function() {
+    const loadingOverlay = document.getElementById('pdf-loading');
+    if (loadingOverlay) {
+        loadingOverlay.style.display = 'none';
+    }
+}
 </script>
 
 <!-- Estilos adicionales -->
@@ -164,6 +176,10 @@ document.addEventListener('DOMContentLoaded', function() {
     padding: 0.5rem 1.5rem;
 }
 
+.pdf-loading {
+    transition: opacity 0.5s ease;
+}
+
 @media (max-width: 768px) {
     .documentation-nav {
         flex-direction: column;
@@ -184,5 +200,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 }
 </style>
-
 {% endblock %}
