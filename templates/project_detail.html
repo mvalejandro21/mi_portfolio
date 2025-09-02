@@ -169,34 +169,6 @@
                         </a>
                     </div>
                     {% endif %}
-
-                    <!-- Demo Live -->
-                    {% if project.live_url and not project.has_ml %}
-                    <div class="resource-item fade-in-up">
-                        <div class="resource-icon">
-                            <i class="fas fa-external-link-alt"></i>
-                        </div>
-                        <h4 class="resource-title">Demo Live</h4>
-                        <p>Prueba la implementación funcional del proyecto</p>
-                        <a href="{{ project.live_url }}" class="resource-button" target="_blank">
-                            <i class="fas fa-play"></i> Ver Demo
-                        </a>
-                    </div>
-                    {% endif %}
-
-                    <!-- Descargas -->
-                    {% if project.download_url %}
-                    <div class="resource-item fade-in-up">
-                        <div class="resource-icon">
-                            <i class="fas fa-file-download"></i>
-                        </div>
-                        <h4 class="resource-title">Descargas</h4>
-                        <p>Reportes, documentos y recursos descargables</p>
-                        <a href="{{ project.download_url }}" class="resource-button" target="_blank">
-                            <i class="fas fa-download"></i> Descargar
-                        </a>
-                    </div>
-                    {% endif %}
                 </div>
             </section>
         </main>

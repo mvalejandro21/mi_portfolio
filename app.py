@@ -10,9 +10,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///projects.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
-with app.app_context():
-    db.drop_all()  # Elimina todas las tablas (¡cuidado en producción!)
-    db.create_all() 
+
+# BLOQUE PARA REINICIAR LA BASE DE DATOS 
+# with app.app_context():
+#     db.drop_all()  # Elimina todas las tablas (¡cuidado en producción!)
+#     db.create_all() 
 
 def init_database():
     """Crea las tablas si no existen y añade proyectos iniciales"""
@@ -72,6 +74,11 @@ def contact():
 def contact_success():
     return render_template('contact.html', success=True)
 
+from flask import send_file
+import os
+
+# ... (tu código existente) ...
+
 @app.route("/projects/<int:project_id>/documentation/<section>")
 def project_documentation(project_id, section):
     project = Project.get_project_by_id(project_id)
@@ -80,19 +87,24 @@ def project_documentation(project_id, section):
     pdf_filename = None
     section_name = ""
     
-    if section == "preprocessing" and project.has_preprocessing and project.preprocessing_pdf:
-        pdf_filename = project.preprocessing_pdf
+    if section == "preprocessing" and project.has_preprocessing:
+        pdf_filename = "wine-preprocessing.pdf"  # Cambia por el nombre real de tu archivo
         section_name = "Preprocesamiento de Datos"
-    elif section == "analysis" and project.has_analysis and project.analysis_pdf:
-        pdf_filename = project.analysis_pdf
+    elif section == "analysis" and project.has_analysis:
+        pdf_filename = "wine-analysis.pdf"  # Cambia por el nombre real de tu archivo
         section_name = "Análisis Exploratorio"
-    elif section == "ml" and project.has_ml and project.ml_pdf:
-        pdf_filename = project.ml_pdf
+    elif section == "ml" and project.has_ml:
+        pdf_filename = "wine-ml.pdf"  # Cambia por el nombre real de tu archivo
         section_name = "Machine Learning"
     
     if not pdf_filename:
         # Redirigir a la página de proyecto si no hay documento
         return redirect(url_for('project_detail', project_id=project_id))
+    
+    # Verificar si el archivo existe
+    pdf_path = os.path.join('static', 'docs', pdf_filename)
+    if not os.path.exists(pdf_path):
+        return f"Archivo {pdf_filename} no encontrado en la carpeta static/docs/", 404
     
     return render_template('project_documentation.html', 
                          project=project, 
@@ -105,7 +117,7 @@ def view_pdf(filename):
     # Ruta segura para evitar path traversal attacks
     safe_path = os.path.join('static', 'docs', filename)
     if not os.path.exists(safe_path):
-        return "PDF no encontrado", 404
+        return f"PDF {filename} no encontrado", 404
         
     return send_file(safe_path, mimetype='application/pdf')
 
@@ -114,7 +126,7 @@ def download_pdf(filename):
     # Ruta segura para evitar path traversal attacks
     safe_path = os.path.join('static', 'docs', filename)
     if not os.path.exists(safe_path):
-        return "PDF no encontrado", 404
+        return f"PDF {filename} no encontrado", 404
         
     return send_file(safe_path, as_attachment=True)
 
