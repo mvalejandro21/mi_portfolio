@@ -56,13 +56,13 @@ class Project(db.Model):
                 Proyecto completo de análisis de vinos con enfoque en la identificación de oportunidades de mercado y la creación de sistemas de recomendación.
                 Así como enfocarnos en temas económicos y exploración de los mismos.
                 """,
-                preprocessing_pdf="https://your-notion.page.link/data-preprocessing",
-                analysis_pdf="https://your-notion.page.link/data-analysis", 
-                ml_pdf="https://your-notion.page.link/machine-learning",
+                preprocessing_pdf="preprocesamiento_wine.pdf",
+                analysis_pdf="analisis_wine.pdf", 
+                ml_pdf="ml_wine.pdf",
                 has_preprocessing=True,
                 has_analysis=True,
                 has_ml=True,
-                demo_url="https://tusuariowine.streamlit.app",
+                demo_url="https://winereviewalejandro.streamlit.app/",
                 dataset_url="https://www.kaggle.com/datasets/zynicide/wine-reviews"
             ),
             cls(
@@ -73,12 +73,13 @@ class Project(db.Model):
                 live_url="https://tusuario-sales.streamlit.app",
                 category="Data Visualization",
                 tags="Python, Streamlit, Plotly, Pandas",
-                analysis_pdf="preprocesamiento_airbnb.pdf",
+                analysis_pdf="analisis_airbnb.pdf",
                 has_analysis=True,
                 has_preprocessing=True,
                 preprocessing_pdf="preprocesamiento_airbnb.pdf",
                 dashboard_url="https://tusuario-sales.streamlit.app",
-                download_url="/downloads/sales-report.pdf"
+                download_url="/downloads/sales-report.pdf",
+                dataset_url="https://insideairbnb.com/get-the-data"
             ),
             cls(
                 title="🔍 Churn de clientes de IBM",
