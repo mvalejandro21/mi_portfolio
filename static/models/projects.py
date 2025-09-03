@@ -48,7 +48,7 @@ class Project(db.Model):
             cls(
                 title="🍷 Wine Variety Analysis",
                 description="Identificar oportunidades de mercado y crear sistemas de recomendación",
-                image="wine_analysis.jpg",
+                image="wineproj.jpeg",
                 github_url="https://github.com/tuusuario/wine-analysis",
                 category="Data Science",
                 tags="Python, Pandas, NLP, spaCy, Machine Learning, Streamlit",
@@ -69,7 +69,7 @@ class Project(db.Model):
             cls(
                 title="📊 Air BnB Analysis Barcelona",
                 description="Analisis de precios y disponibilidad de alojamientos en Barcelona",
-                image="sales_dashboard.jpg",
+                image="airbnbproj.jpeg",
                 github_url="https://github.com/tuusuario/sales-dashboard",
                 live_url="https://tusuario-sales.streamlit.app",
                 category="Data Visualization",
