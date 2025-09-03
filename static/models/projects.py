@@ -81,19 +81,6 @@ class Project(db.Model):
                 dashboard_url="https://app.powerbi.com/reportEmbed?reportId=8c4b8471-6e14-47cc-bb48-71063bf202de&autoAuth=true&ctid=8aebddb6-3418-43a1-a255-b964186ecc64",
                 download_url="/downloads/sales-report.pdf",
                 dataset_url="https://insideairbnb.com/get-the-data"
-            ),
-            cls(
-                title="🔍 Churn de clientes de IBM",
-                description="Análisis de clusters para segmentación de clientes",
-                image="segmentation.jpg",
-                github_url="https://github.com/tuusuario/customer-segmentation",
-                category="Data Analysis",
-                tags="Python, Scikit-learn, Clustering, Visualización",
-                preprocessing_pdf="https://your-notion.page.link/customer-preprocessing",
-                analysis_pdf="https://your-notion.page.link/customer-analysis",
-                has_preprocessing=True,
-                has_analysis=True,
-                download_url="/downloads/segmentation-report.pdf"
             )
         ]
         
