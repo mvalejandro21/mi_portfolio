@@ -6,68 +6,161 @@
         <div class="contact-content">
             <div class="contact-info">
                 <h1>Contacto</h1>
-                <p>¿Interesado en trabajar juntos? Contáctame usando el formulario o a través de mis redes sociales.</p>
+                <p>¿Interesado en trabajar juntos? Contáctame a través de mis redes sociales o por los siguientes medios:</p>
                 
                 <div class="contact-details">
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
                         <div>
                             <h3>Email</h3>
-                            <p style="color: #2c3e50; font-weight: 500;">mvalejandro21@gmail.com</p>
+                            <p style="color: #2c3e50; font-weight: 500; font-size: 18px;">mvalejandro21@gmail.com</p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
                         <div>
                             <h3>Teléfono</h3>
-                            <p style="color: #2c3e50; font-weight: 500;">+34 651 81 58 12</p>
+                            <p style="color: #2c3e50; font-weight: 500; font-size: 18px;">+34 651 81 58 12</p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
                             <h3>Ubicación</h3>
-                            <p style="color: #2c3e50; font-weight: 500;">Barcelona, España</p>
+                            <p style="color: #2c3e50; font-weight: 500; font-size: 18px;">Barcelona, España</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="social-contact">
-                    <a href="https://github.com/mvalejandro21" class="social-icon"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/alejandro-muñoz-valenzuela" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    <h3 style="color: #2c3e50; margin-bottom: 1rem;">Sígueme en:</h3>
+                    <div class="social-icons">
+                        <a href="https://github.com/mvalejandro21" class="social-icon" target="_blank">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/alejandro-muñoz-valenzuela" class="social-icon" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                    </div>
                 </div>
             </div>
             
-            <div class="contact-form">
-                {% if success %}
-                <div class="success-message">
-                    <i class="fas fa-check-circle"></i>
-                    <h3>¡Mensaje enviado con éxito!</h3>
-                    <p>Gracias por contactarme. Te responderé lo antes posible.</p>
-                </div>
-                {% else %}
-                <form method="POST" action="{{ url_for('contact') }}">
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Asunto</label>
-                        <input type="text" id="subject" name="subject">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Mensaje</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn">Enviar Mensaje</button>
-                </form>
-                {% endif %}
+            <div class="contact-image">
+                <img src="{{ url_for('static', filename='images/contact-image.jpg') }}" alt="Contacto" style="width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <p style="text-align: center; margin-top: 1rem; color: #666; font-style: italic;">
+                    Disponible para nuevos proyectos y oportunidades
+                </p>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    .contact {
+        padding: 80px 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        min-height: calc(100vh - 80px);
+    }
+    
+    .contact-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        align-items: center;
+    }
+    
+    .contact-info h1 {
+        color: #2c3e50;
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    
+    .contact-info > p {
+        color: #5d6d7e;
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin-bottom: 2.5rem;
+    }
+    
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease;
+    }
+    
+    .contact-item:hover {
+        transform: translateY(-5px);
+    }
+    
+    .contact-item i {
+        font-size: 2rem;
+        color: #3498db;
+        width: 50px;
+        text-align: center;
+    }
+    
+    .contact-item h3 {
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+        font-size: 1.3rem;
+    }
+    
+    .social-contact {
+        margin-top: 3rem;
+    }
+    
+    .social-icons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .social-icon {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem 1.5rem;
+        background: #2c3e50;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+        background: #3498db;
+        transform: translateY(-2px);
+    }
+    
+    .social-icon i {
+        font-size: 1.5rem;
+    }
+    
+    @media (max-width: 768px) {
+        .contact-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .contact-info h1 {
+            font-size: 2.5rem;
+        }
+        
+        .social-icons {
+            flex-direction: column;
+        }
+    }
+</style>
 {% endblock %}
