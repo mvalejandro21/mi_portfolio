@@ -26,7 +26,7 @@
                     <div class="col-lg-5 mt-4 mt-lg-0">
                         <div class="hero-image-container">
                             {% if project.image %}
-                            <img src="{{ url_for('static', filename='images/' + project.image) }}" 
+                            <img src="{{ url_for('static', filename='img/' + project.image) }}" 
                                  alt="{{ project.title }}" class="hero-image">
                             {% else %}
                             <div class="hero-image bg-light d-flex align-items-center justify-content-center">
