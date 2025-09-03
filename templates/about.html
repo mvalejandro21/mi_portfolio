@@ -1,109 +1,166 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="about-section">
+<section class="contact">
     <div class="container">
-        <div class="about-grid">
-            <div class="about-image animate-on-scroll">
-                <div class="image-wrapper">
-                    <img src="{{ url_for('static', filename='img/profile.jpg') }}" alt="Alejandro Muñoz Valenzuela" class="profile-image">
-                    <div class="image-border"></div>
-                    <div class="image-accent"></div>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h1>Contacto</h1>
+                <p>¿Interesado en trabajar juntos? Contáctame a través de mis redes sociales o por los siguientes medios:</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p style="color: #2c3e50; font-weight: 500; font-size: 18px;">mvalejandro21@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Teléfono</h3>
+                            <p style="color: #2c3e50; font-weight: 500; font-size: 18px;">+34 651 81 58 12</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Ubicación</h3>
+                            <p style="color: #2c3e50; font-weight: 500; font-size: 18px;">Barcelona, España</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="social-contact">
+                    <h3 style="color: #2c3e50; margin-bottom: 1rem;">Sígueme en:</h3>
+                    <div class="social-icons">
+                        <a href="https://github.com/mvalejandro21" class="social-icon" target="_blank">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/alejandro-muñoz-valenzuela" class="social-icon" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                    </div>
                 </div>
             </div>
             
-            <div class="about-content animate-on-scroll" data-delay="0.1s">
-                <h1 class="section-title">
-                    <span class="title-number">02.</span> Sobre Mí
-                    <span class="title-line"></span>
-                </h1>
-                
-                <div class="about-text">
-                    <p class="intro-text">Analista de datos con base técnica en desarrollo y pasión por transformar datos en decisiones con impacto real.</p>
-                    
-                    <div class="bio-section">
-                        <p>Mi interés por la tecnología comenzó desde pequeño, fascinado por el <strong>hardware y el software</strong>. Esta curiosidad me llevó a formarme en <strong>Sistemas Microinformáticos y Redes</strong>, donde descubrí el mundo de las redes, los sistemas operativos y la infraestructura tecnológica.</p>
-                        
-                        <p>Posteriormente, decidí profundizar en el desarrollo y cursé <strong>Desarrollo de Aplicaciones Multiplataforma (DAM)</strong>, donde aprendí tecnologías como HTML, CSS, Bash, Kotlin, SQL, Java, PHP, Odoo, Swift y C#. Aunque solo tuvimos una introducción a <strong>Python</strong>, fue suficiente para captar mi interés y empezar a explorarlo por mi cuenta.</p>
-                    </div>
-                    
-                    <div class="highlight-card">
-                        <i class="fas fa-lightbulb"></i>
-                        <p>Fue precisamente al empezar a trastear con Python cuando quise ayudar a mi padre con su negocio, digitalizando sus registros de ventas para poder analizarlos después. Sin saberlo, estaba dando mis primeros pasos en el análisis de datos.</p>
-                    </div>
-                    
-                    <div class="bio-section">
-                        <p>Esa experiencia fue el punto de inflexión que me llevó a especializarme en el <strong>análisis de datos</strong>. Hoy combino mis conocimientos técnicos con la capacidad de extraer insights valiosos, y busco mi primera oportunidad profesional para seguir creciendo en este campo que me apasiona.</p>
-                    </div>
-                </div>
+            <div class="contact-image">
+                <img src="{{ url_for('static', filename='images/contact-image.jpg') }}" alt="Contacto" style="width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <p style="text-align: center; margin-top: 1rem; color: #666; font-style: italic;">
+                    Disponible para nuevos proyectos y oportunidades
+                </p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="details-section">
-    <div class="container">
-        <div class="details-grid animate-on-scroll">
-            <div class="detail-card">
-                <div class="card-header">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h3>Educación</h3>
-                </div>
-                <ul class="detail-list">
-                    <li>
-                        <span class="detail-year">2024</span>
-                        <div>
-                            <h4>Bootcamp Análisis de Datos e IA</h4>
-                            <p>Upgrade Hub</p>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="detail-year">2022</span>
-                        <div>
-                            <h4>Desarrollo Aplicaciones Multiplataforma</h4>
-                            <p>La Salle Gràcia</p>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="detail-year">2019</span>
-                        <div>
-                            <h4>Sistemas Microinformáticos y Redes</h4>
-                            <p>Escola Pia Mataró</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="detail-card">
-                <div class="card-header">
-                    <i class="fas fa-briefcase"></i>
-                    <h3>Experiencia</h3>
-                </div>
-                <ul class="detail-list">
-                    <li>
-                        <span class="detail-year">2023-24</span>
-                        <div>
-                            <h4>Desarrollador Flutter (Prácticas)</h4>
-                            <p>Abalit Technologies</p>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="detail-year">2025</span>
-                        <div>
-                            <h4>Proyectos Personales</h4>
-                            <p>Análisis de Datos en Python</p>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="detail-year">2019</span>
-                        <div>
-                            <h4>Técnico Mantenimiento Informático</h4>
-                            <p>Ordinsa</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+<style>
+    .contact {
+        padding: 80px 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        min-height: calc(100vh - 80px);
+    }
+    
+    .contact-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        align-items: center;
+    }
+    
+    .contact-info h1 {
+        color: #2c3e50;
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    
+    .contact-info > p {
+        color: #5d6d7e;
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin-bottom: 2.5rem;
+    }
+    
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease;
+    }
+    
+    .contact-item:hover {
+        transform: translateY(-5px);
+    }
+    
+    .contact-item i {
+        font-size: 2rem;
+        color: #3498db;
+        width: 50px;
+        text-align: center;
+    }
+    
+    .contact-item h3 {
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+        font-size: 1.3rem;
+    }
+    
+    .social-contact {
+        margin-top: 3rem;
+    }
+    
+    .social-icons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .social-icon {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem 1.5rem;
+        background: #2c3e50;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+        background: #3498db;
+        transform: translateY(-2px);
+    }
+    
+    .social-icon i {
+        font-size: 1.5rem;
+    }
+    
+    @media (max-width: 768px) {
+        .contact-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .contact-info h1 {
+            font-size: 2.5rem;
+        }
+        
+        .social-icons {
+            flex-direction: column;
+        }
+    }
+</style>
 {% endblock %}

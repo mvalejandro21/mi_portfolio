@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, send_file, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, send_file, send_from_directory, flash
 import os
 from static.models.projects import db, Project  # Import del modelo y DB
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import smtplib
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'default_secret_key')
@@ -12,11 +13,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///projects.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
-# Configuración de email
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USER = 'mvalejandro21@gmail.com'
-EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD', '')  # Usar contraseña de aplicación de Gmail
 
 # BLOQUE PARA REINICIAR LA BASE DE DATOS 
 # with app.app_context():
@@ -66,76 +62,10 @@ def cv():
 def download_cv():
     path = 'cv.pdf'
     return send_file(path, as_attachment=True)
-@app.route('/contact', methods=['GET', 'POST'])
+
+@app.route('/contact')
 def contact():
-    if request.method == 'POST':
-        try:
-            # Obtener datos del formulario
-            name = request.form['name']
-            email = request.form['email']
-            subject = request.form.get('subject', 'Sin asunto')
-            message = request.form['message']
-            
-            # Validar campos obligatorios
-            if not name or not email or not message:
-                flash('Por favor, completa todos los campos obligatorios', 'error')
-                return render_template('contact.html', success=False)
-            
-            # Enviar email
-            send_contact_email(name, email, subject, message)
-            
-            flash('¡Mensaje enviado con éxito! Te responderé pronto.', 'success')
-            return redirect(url_for('contact_success'))
-            
-        except Exception as e:
-            print(f"Error sending email: {e}")
-            flash('Error al enviar el mensaje. Por favor, intenta nuevamente.', 'error')
-            return render_template('contact.html', success=False)
-    
-    return render_template('contact.html', success=False)
-
-@app.route('/contact/success')
-def contact_success():
-    return render_template('contact.html', success=True)
-
-def send_contact_email(name, email, subject, message):
-    """Envía el email de contacto"""
-    try:
-        # Configurar el mensaje
-        msg = MIMEMultipart()
-        msg['From'] = EMAIL_USER
-        msg['To'] = 'mvalejandro21@gmail.com'  # Tu email de destino
-        msg['Subject'] = f'Nuevo mensaje de contacto: {subject}'
-        
-        # Cuerpo del email
-        body = f"""
-        Nuevo mensaje de contacto desde tu portfolio:
-        
-        Nombre: {name}
-        Email: {email}
-        Asunto: {subject}
-        
-        Mensaje:
-        {message}
-        
-        ---
-        Este mensaje fue enviado desde el formulario de contacto de tu portfolio.
-        """
-        
-        msg.attach(MIMEText(body, 'plain'))
-        
-        # Enviar email
-        with smtplib.SMTP(EMAIL_HOST, EMAIL_PORT) as server:
-            server.starttls()
-            server.login(EMAIL_USER, EMAIL_PASSWORD)
-            server.send_message(msg)
-            
-        print("Email enviado exitosamente")
-        
-    except Exception as e:
-        print(f"Error enviando email: {e}")
-        raise
-
+    return render_template('contact.html')
 
 @app.route("/projects/<int:project_id>/documentation/<section>")
 def project_documentation(project_id, section):
