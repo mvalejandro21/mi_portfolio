@@ -20,7 +20,7 @@
                 <div class="project-card fade-in-up">
                     {% if project.image %}
                     <div class="project-image-container">
-                        <img src="{{ url_for('static', filename='images/' ~ project.image) }}" 
+                        <img src="{{ url_for('static', filename='img/' ~ project.image) }}" 
                              alt="{{ project.title }}" class="project-image">
                         <div class="project-overlay">
                             <a href="{{ url_for('project_detail', project_id=project.id) }}" class="project-link">
