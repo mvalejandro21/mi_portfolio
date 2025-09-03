@@ -63,7 +63,8 @@ class Project(db.Model):
                 has_analysis=True,
                 has_ml=True,
                 demo_url="https://winereviewalejandro.streamlit.app/",
-                dataset_url="https://www.kaggle.com/datasets/zynicide/wine-reviews"
+                dataset_url="https://www.kaggle.com/datasets/zynicide/wine-reviews",
+                dashboard_url="https://app.powerbi.com/reportEmbed?reportId=31978b18-5354-444e-8d69-bfaccc030d8c&autoAuth=true&ctid=8aebddb6-3418-43a1-a255-b964186ecc64"
             ),
             cls(
                 title="📊 Air BnB Analysis Barcelona",
