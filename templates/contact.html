@@ -33,7 +33,7 @@
                 </div>
                 
                 <div class="social-contact">
-                    <h3 style="color: #2c3e50; margin-bottom: 1rem;">Sígueme en:</h3>
+                    <h3 style="color: #2c3e50; margin-bottom: 2rem;">Sígueme en:</h3>
                     <div class="social-icons">
                         <a href="https://github.com/mvalejandro21" class="social-icon" target="_blank">
                             <i class="fab fa-github"></i>
@@ -45,13 +45,6 @@
                         </a>
                     </div>
                 </div>
-            </div>
-            
-            <div class="contact-image">
-                <img src="{{ url_for('static', filename='images/contact-image.jpg') }}" alt="Contacto" style="width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                <p style="text-align: center; margin-top: 1rem; color: #666; font-style: italic;">
-                    Disponible para nuevos proyectos y oportunidades
-                </p>
             </div>
         </div>
     </div>
@@ -123,31 +116,43 @@
     
     .social-icons {
         display: flex;
-        gap: 1rem;
+        gap: 1.5rem; /* Más separación entre iconos */
         flex-wrap: wrap;
     }
     
     .social-icon {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        padding: 1rem 1.5rem;
+        gap: 0.8rem;
+        padding: 1.2rem 2rem; /* Más ancho y alto */
         background: #2c3e50;
         color: white;
         text-decoration: none;
-        border-radius: 8px;
+        border-radius: 12px; /* Bordes más redondeados */
         transition: all 0.3s ease;
+        min-width: 160px; /* Ancho mínimo para que quepa el texto */
+        justify-content: center; /* Centrar contenido */
+        flex: 1; /* Que se expandan para ocupar espacio disponible */
+        max-width: 200px; /* Ancho máximo */
     }
     
     .social-icon:hover {
         background: #3498db;
-        transform: translateY(-2px);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
     }
     
     .social-icon i {
-        font-size: 1.5rem;
+        font-size: 1.8rem; /* Iconos más grandes */
     }
     
+    .social-icon span {
+        font-size: 1.1rem; /* Texto más grande */
+        font-weight: 500;
+        white-space: nowrap; /* Evitar que el texto se divida */
+    }
+    
+    /* Efecto para dispositivos móviles */
     @media (max-width: 768px) {
         .contact-content {
             grid-template-columns: 1fr;
@@ -160,6 +165,33 @@
         
         .social-icons {
             flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .social-icon {
+            min-width: 100%; /* Ocupar todo el ancho en móviles */
+            max-width: 100%;
+            justify-content: center;
+        }
+        
+        .contact-item {
+            padding: 1.2rem;
+        }
+        
+        .contact-item i {
+            font-size: 1.8rem;
+        }
+    }
+    
+    /* Para tablets */
+    @media (max-width: 1024px) {
+        .social-icon {
+            min-width: 140px;
+            padding: 1rem 1.5rem;
+        }
+        
+        .social-icon span {
+            font-size: 1rem;
         }
     }
 </style>
