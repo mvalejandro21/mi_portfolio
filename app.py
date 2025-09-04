@@ -15,9 +15,9 @@ db.init_app(app)
 
 
 # BLOQUE PARA REINICIAR LA BASE DE DATOS 
-# with app.app_context():
-#     db.drop_all()  # Elimina todas las tablas (¡cuidado en producción!)
-#     db.create_all() 
+with app.app_context():
+    db.drop_all()  # Elimina todas las tablas (¡cuidado en producción!)
+    db.create_all() 
 
 def init_database():
     """Crea las tablas si no existen y añade proyectos iniciales"""
@@ -89,7 +89,7 @@ def project_documentation(project_id, section):
         # Redirigir a la página de proyecto si no hay documento
         return redirect(url_for('project_detail', project_id=project_id))
     
-    # Verificar si el archivo existe
+    # Verificar si el archivo existezº
     pdf_path = os.path.join('static', 'docs', 'pdf', pdf_filename)
     if not os.path.exists(pdf_path):
         return f"Archivo {pdf_filename} no encontrado en la carpeta static/docs/pdf/", 404
