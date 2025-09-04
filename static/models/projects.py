@@ -18,14 +18,16 @@ class Project(db.Model):
     technologies = db.Column(db.Text)  # Lista de tecnologías principales
 
     # Campos específicos para proyectos de datos
-    has_preprocessing = db.Column(db.Boolean, default=False)
-    has_analysis = db.Column(db.Boolean, default=False)
-    has_ml = db.Column(db.Boolean, default=False)
+    
     preprocessing_url = db.Column(db.String(500))
     analysis_url = db.Column(db.String(500))
     ml_url = db.Column(db.String(500))
     dataset_url = db.Column(db.String(200))
     dashboard_url = db.Column(db.String(200))
+
+    has_preprocessing = db.Column(db.Boolean, default=False)
+    has_analysis = db.Column(db.Boolean, default=False)
+    has_ml = db.Column(db.Boolean, default=False)
 
     preprocessing_pdf = db.Column(db.String(100))
     analysis_pdf = db.Column(db.String(100))
@@ -36,6 +38,10 @@ class Project(db.Model):
     has_backend = db.Column(db.Boolean, default=False)
     has_database = db.Column(db.Boolean, default=False)
     features = db.Column(db.Text)  # Lista de características principales
+
+    frontend_pdf = db.Column(db.String(100))
+    backend_pdf = db.Column(db.String(100))
+    database_pdf = db.Column(db.String(100))
 
     # Campos generales
     demo_url = db.Column(db.String(200))
@@ -116,7 +122,6 @@ class Project(db.Model):
                 Proyecto de análisis de datos de un proyecto en Csharp.
                 """,
                 technologies="Python, Pandas, Streamlit, Plotly",
-                has_preprocessing=True,
                 preprocessing_pdf="preprocesamiento_airbnb.pdf",
                 dashboard_url="https://app.powerbi.com/reportEmbed?reportId=8c4b8471-6e14-47cc-bb48-71063bf202de&autoAuth=true&ctid=8aebddb6-3418-43a1-a255-b964186ecc64",
                 download_url="/downloads/sales-report.pdf",

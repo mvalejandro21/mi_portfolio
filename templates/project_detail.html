@@ -149,7 +149,7 @@
                     {% if project.has_database %}
                     <div class="doc-card fade-in-up">
                         <div class="doc-header">
-                            <div class="doc-icon database">
+                            <div class="doc-icon preprocessing">
                                 <i class="fas fa-database"></i>
                             </div>
                             <h3 class="doc-title">Base de Datos</h3>
@@ -159,7 +159,7 @@
                         </p>
                         <div class="button-group">
                             <a href="{{ url_for('project_documentation', project_id=project.id, section='database') }}" 
-                            class="primary-button database">
+                            class="primary-button preprocessing">
                                 <i class="fas fa-book-open"></i>
                                 <span>Ver Documentación</span>
                             </a>
@@ -171,7 +171,7 @@
                     {% if project.has_backend %}
                     <div class="doc-card fade-in-up">
                         <div class="doc-header">
-                            <div class="doc-icon backend">
+                            <div class="doc-icon analysis">
                                 <i class="fas fa-server"></i>
                             </div>
                             <h3 class="doc-title">Desarrollo Backend</h3>
@@ -182,7 +182,7 @@
                         </p>
                         <div class="button-group">
                             <a href="{{ url_for('project_documentation', project_id=project.id, section='backend') }}" 
-                            class="primary-button backend">
+                            class="primary-button analysis">
                                 <i class="fas fa-chart-line"></i>
                                 <span>Ver Documentación</span>
                             </a>
@@ -194,7 +194,7 @@
                     {% if project.has_frontend %}
                     <div class="doc-card fade-in-up">
                         <div class="doc-header">
-                            <div class="doc-icon frontend">
+                            <div class="doc-icon ml">
                                 <i class="fas fa-laptop-code"></i>
                             </div>
                             <h3 class="doc-title">Desarrollo Frontend</h3>
@@ -205,7 +205,7 @@
                         </p>
                         <div class="button-group">
                             <a href="{{ url_for('project_documentation', project_id=project.id, section='frontend') }}" 
-                            class="primary-button frontend">
+                            class="primary-button ml">
                                 <i class="fas fa-robot"></i>
                                 <span>Ver Documentación</span>
                             </a>
