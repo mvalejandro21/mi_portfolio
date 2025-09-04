@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alejandro Muñoz Valenzuela | {{ title if title else 'Analista de Datos' }}</title>
+    <title>Alejandro Muñoz Valenzuela | {{ title if title else 'Desarrollador Full-Stack & Analista de Datos' }}</title>
+    
+    <!-- Meta descripción para perfil mixto -->
+    <meta name="description" content="Desarrollador Full-Stack especializado en Java, C#, PHP y Python | Analista de Datos & Machine Learning | Creando soluciones tecnológicas completas">
+    <meta name="keywords" content="desarrollador full-stack, analista de datos, Java, C#, PHP, Python, machine learning, desarrollo web, data science">
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=SF+Pro+Text:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -50,6 +55,7 @@
                 <div class="footer-brand">
                     <img src="{{ url_for('static', filename='img/logo-light.png') }}" alt="AMV" width="30">
                     <span>Alejandro Muñoz Valenzuela</span>
+                    <span class="footer-subtitle">Desarrollador Full-Stack & Analista de Datos</span>
                 </div>
                 
                 <div class="footer-links">

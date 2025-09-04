@@ -954,7 +954,100 @@
     }
 }
 
+/* Subtítulo en el footer */
+.footer-subtitle {
+    display: block;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 0.3rem;
+    font-weight: 300;
+}
 
+/* Badges de tecnologías mixtas */
+.tech-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0.3rem;
+    transition: all 0.3s ease;
+}
+
+.tech-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Colores por categoría de tecnología */
+.tech-badge.data-science {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.tech-badge.web-dev {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+.tech-badge.java {
+    background: linear-gradient(135deg, #007396 0%, #ED8B00 100%);
+    color: white;
+}
+
+.tech-badge.csharp {
+    background: linear-gradient(135deg, #68217a 0%, #9b4f96 100%);
+    color: white;
+}
+
+.tech-badge.php {
+    background: linear-gradient(135deg, #777BB3 0%, #4F5B93 100%);
+    color: white;
+}
+
+.tech-badge.python {
+    background: linear-gradient(135deg, #3776AB 0%, #306998 100%);
+    color: white;
+}
+
+/* Sección de habilidades mixtas */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.skill-category {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.skill-category h3 {
+    color: #fff;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.skill-category.development h3 i {
+    color: #f5576c;
+}
+
+.skill-category.data h3 i {
+    color: #667eea;
+}
+
+.skill-category.ai h3 i {
+    color: #764ba2;
+}
 /* Estados vacíos */
 .row:empty::before {
     content: "No hay proyectos disponibles";

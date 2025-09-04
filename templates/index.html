@@ -4,8 +4,8 @@
 <section class="hero">
     <div class="container">
         <div class="hero-content">
-            <h1>Datos Hoy, Soluciones Mañana</h1>
-            <p>Analista de Datos | Limpieza, Análisis y Visualización</p>
+            <h1>Desarrollo & Datos: Soluciones Completas</h1>
+            <p>Desarrollador Full-Stack & Analista de Datos | Java, C#, PHP, Python, SQL, Excel, Power BI</p>
             <div class="hero-btns">
                 <a href="{{ url_for('projects') }}" class="btn">Ver Proyectos</a>
                 <a href="{{ url_for('contact') }}" class="btn secondary">Contactar</a>
@@ -19,52 +19,65 @@
         <h2>Habilidades Técnicas</h2>
         <div class="skills-grid">
             
+            <!-- Desarrollo Java -->
+            <div class="skill-card">
+                <i class="fab fa-java"></i>
+                <h3>Java & Spring</h3>
+                <p>Desarrollo de aplicaciones empresariales con Spring Boot y microservicios</p>
+            </div>
+            
+            <!-- Desarrollo C# -->
+            <div class="skill-card">
+                <i class="fab fa-microsoft"></i>
+                <h3>C# & .NET</h3>
+                <p>Desarrollo de aplicaciones Windows y web con ASP.NET Core y Entity Framework</p>
+            </div>
+            
+            <!-- Desarrollo PHP -->
+            <div class="skill-card">
+                <i class="fab fa-php"></i>
+                <h3>PHP & Laravel</h3>
+                <p>Desarrollo web con Laravel, Symfony y APIs RESTful</p>
+            </div>
+            
             <!-- Python -->
             <div class="skill-card">
                 <i class="fab fa-python"></i>
                 <h3>Python</h3>
-                <p>Análisis de datos con Pandas y NumPy, visualización con Matplotlib y Seaborn</p>
+                <p>Análisis de datos con Pandas, NumPy y desarrollo con Django/Flask</p>
             </div>
             
-            <!-- SQL -->
+            <!-- SQL y Bases de Datos -->
             <div class="skill-card">
                 <i class="fas fa-database"></i>
-                <h3>SQL</h3>
-                <p>Consultas y gestión de bases de datos en MySQL y PostgreSQL</p>
+                <h3>Bases de Datos</h3>
+                <p>MySQL, PostgreSQL, SQL Server y MongoDB para desarrollo y análisis</p>
             </div>
             
-            <!-- Visualización -->
+            <!-- Frontend -->
+            <div class="skill-card">
+                <i class="fab fa-js"></i>
+                <h3>JavaScript & React</h3>
+                <p>Desarrollo frontend con React, Vue.js y aplicaciones interactivas</p>
+            </div>
+
+            <!-- Análisis de Datos -->
             <div class="skill-card">
                 <i class="fas fa-chart-bar"></i>
-                <h3>Visualización de Datos</h3>
-                <p>Creación de dashboards interactivos con Power BI y Tableau</p>
+                <h3>Análisis de Datos</h3>
+                <p>Power BI, Tableau, análisis estadístico y visualización de datos</p>
             </div>
             
             <!-- Machine Learning -->
             <div class="skill-card">
                 <i class="fas fa-brain"></i>
                 <h3>Machine Learning</h3>
-                <p>Modelos de clasificación, regresión y clustering con Scikit-learn</p>
-            </div>
-            
-            <!-- Excel -->
-            <div class="skill-card">
-                <i class="fas fa-file-excel"></i>
-                <h3>Excel Avanzado</h3>
-                <p>Tablas dinámicas, Power Query y análisis de datos</p>
-            </div>
-            
-            <!-- Git y Control de Versiones -->
-            <div class="skill-card">
-                <i class="fab fa-git-alt"></i>
-                <h3>Control de Versiones</h3>
-                <p>Uso de Git y GitHub para gestión de proyectos</p>
+                <p>Modelos predictivos con Scikit-learn y procesamiento de datos</p>
             </div>
 
         </div>
     </div>
 </section>
-
 
 <section class="featured-projects">
     <div class="container">
@@ -78,6 +91,32 @@
                 <a href="{{ url_for('project_detail', project_id=project.id) }}" class="btn small">Ver Detalles</a>
             </div>
             {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Nueva sección para mostrar el perfil mixto -->
+<section class="about-preview">
+    <div class="container">
+        <div class="about-content">
+            <h2>Enfoque Integral</h2>
+            <div class="about-grid">
+                <div class="about-item">
+                    <i class="fas fa-code"></i>
+                    <h3>Desarrollo Completo</h3>
+                    <p>Creación de aplicaciones con Java, C#, PHP y Python</p>
+                </div>
+                <div class="about-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Análisis de Datos</h3>
+                    <p>Transformación de datos en insights accionables mediante análisis avanzado</p>
+                </div>
+                <div class="about-item">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Soluciones Integradas</h3>
+                    <p>Combinando desarrollo software y análisis para soluciones end-to-end</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
