@@ -27,6 +27,10 @@ class Project(db.Model):
     dataset_url = db.Column(db.String(200))
     dashboard_url = db.Column(db.String(200))
 
+    preprocessing_pdf = db.Column(db.String(100))
+    analysis_pdf = db.Column(db.String(100))
+    ml_pdf = db.Column(db.String(100))
+
     # Campos específicos para proyectos de desarrollo
     has_frontend = db.Column(db.Boolean, default=False)
     has_backend = db.Column(db.Boolean, default=False)
