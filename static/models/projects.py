@@ -107,25 +107,22 @@ class Project(db.Model):
                 dataset_url="https://insideairbnb.com/get-the-data"
             ),
             cls(
-                title="📊 CsharpProject",
-                description="Análisis de datos de un proyecto en Csharp",
-                image="csharpproj.jpeg",
-                github_url="https://github.com/tuusuario/csharp-project",
+                title="📊 Java Basic Ecommerce",
+                description="Backend de un Ecommerce sencillo en Java",
+                image="basicecommerce.jpeg",
+                github_url="https://github.com/mvalejandro21",
                 live_url="https://tusuario-csharp.streamlit.app",
-                category=".NET Development",
-                tags="Python, Streamlit, Plotly, Pandas",
-                has_database=True,
-                has_frontend=True,
+                category="JAVA Development",
+                tags="Java",
+                has_database=False,
+                has_frontend=False,
                 has_backend=True,
-                project_type="data",
+                project_type="backend",
                 long_description="""
-                Proyecto de análisis de datos de un proyecto en Csharp.
+                Proyecto basico backend de un ecommerce
                 """,
-                technologies="Python, Pandas, Streamlit, Plotly",
-                preprocessing_pdf="preprocesamiento_airbnb.pdf",
-                dashboard_url="https://app.powerbi.com/reportEmbed?reportId=8c4b8471-6e14-47cc-bb48-71063bf202de&autoAuth=true&ctid=8aebddb6-3418-43a1-a255-b964186ecc64",
-                download_url="/downloads/sales-report.pdf",
-                dataset_url="https://insideairbnb.com/get-the-data"
+                technologies="Java",
+                backend_pdf = "basicecommerce.pdf"
             )
         ]
         
