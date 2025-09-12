@@ -44,6 +44,7 @@ class Project(db.Model):
     database_pdf = db.Column(db.String(100))
 
     # Campos generales
+    backend_url = db.Column(db.String(200))
     demo_url = db.Column(db.String(200))
     download_url = db.Column(db.String(200))
     documentation_url = db.Column(db.String(200))
@@ -122,9 +123,10 @@ class Project(db.Model):
                 Proyecto basico backend de un ecommerce
                 """,
                 technologies="Java",
-                backend_pdf = "basicecommerce.pdf"
+                backend_pdf = "basicecommerce.pdf",
+                backend_url = "basicecommerce.html"
             )
-        ]
+            ]
         
         for project in predefined_projects:
             existing_project = cls.query.filter_by(title=project.title).first()
