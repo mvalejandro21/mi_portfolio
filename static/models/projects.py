@@ -107,25 +107,23 @@ class Project(db.Model):
                 download_url="/downloads/sales-report.pdf",
                 dataset_url="https://insideairbnb.com/get-the-data"
             ),
-            cls(
-                title="📊 Java Basic Ecommerce",
-                description="Backend de un Ecommerce sencillo en Java",
-                image="basicecommerce.jpeg",
-                github_url="https://github.com/mvalejandro21",
-                live_url="https://tusuario-csharp.streamlit.app",
-                category="JAVA Development",
-                tags="Java",
-                has_database=False,
-                has_frontend=False,
-                has_backend=True,
-                project_type="backend",
-                long_description="""
-                Proyecto basico backend de un ecommerce
-                """,
-                technologies="Java",
-                backend_pdf = "basicecommerce.pdf",
-                backend_url = "basicecommerce.html"
-            )
+            #cls(
+                #title="📊 Java Basic Ecommerce",
+                #description="Backend de un Ecommerce sencillo en Java",
+                #image="basicecommerce.jpeg",
+                #github_url="https://github.com/mvalejandro21",
+                #live_url="https://tusuario-csharp.streamlit.app",
+                #category="JAVA Development",
+                #tags="Java",
+                #has_database=False,
+                #has_frontend=False,
+                #has_backend=True,
+                #project_type="backend",
+                #long_description="""
+                #Proyecto basico backend de un ecommerce
+                #""",
+                #technologies="Java",
+                #backend_pdf = "basicecommerce.pdf",#)
             ]
         
         for project in predefined_projects:
